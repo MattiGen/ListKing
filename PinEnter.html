@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pin Enter 4b</title>
+    <link rel="stylesheet" href="StyleSheets/PinEnter.css">
+<script src="scripts/requests.js"></script>
+</head>
+<body>
+
+<input class = 'input1' type="text" id="pin" placeholder="Enter pin" maxlength="5">
+<input class = 'input2' type="text" id="usrname" placeholder="Enter User Name" maxlength="10">
+<button class = 'join' type="button" onclick="submitPin()"> Join </button>
+
+
+<a id='nextPage' href="WaitBefore.html" hidden></a>
+
+<script>
+    function submitPin(){
+        let pin=document.getElementById('pin').value;
+        let usrName=document.getElementById('usrname').value;
+        postRequest(usrName, "url with conotated pin");
+        ///Make if statement based on post request to go
+        document.getElementById('nextPage').click();
+    }
+</script>
+
+
+
+</body>
+</html>
+
+
+</html>
+

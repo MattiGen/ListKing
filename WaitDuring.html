@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wait 7c</title>
+</head>
+<body>
+<a href="Play.html">Play</a>
+
+<p id="scoreDisplay"></p>
+
+</body>
+
+<script>
+    let score=localStorage.getItem("score");
+    document.getElementById('scoreDisplay').textContent = "You have " +score+' points';
+</script>
+</html>

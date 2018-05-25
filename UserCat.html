@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Cat 3b</title>
+</head>
+
+<body>
+<p>This is where you are going to pick a category</p>
+<select id="category">
+
+</select>
+
+<button type="button" onclick="getCat()">Log Category</button>
+
+<script>
+    //This is where I am going to pull the questions from the server
+    let select = document.getElementById("category");
+    let options = ["Cat1", "Cat2", "Cat3", "Cat4", "Cat5"];
+
+    // Optional: Clear all existing options first:
+    select.innerHTML = "";
+    // Populate list with options:
+    for(let i = 0; i < options.length; i++) {
+        let opt = options[i];
+        select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
+    }
+
+    function getCat() {
+        let e = document.getElementById("category");
+        let selectedCat = e.options[e.selectedIndex].value;
+        console.log(selectedCat);
+    }
+    //Make it so it just saves the selected varaible, and have a button that logs the result to check, no need to print the
+    //varaible, also fix variable names
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 5a</title>
+    <script src="scripts/Timer.js"></script>
+</head>
+<body onload="timer">
+<p>the question is going to be here with a timer as well, I beleive it is 5a</p>
+<p id="timer"></p>
+
+<script>
+    let timeleft=15;
+    let timer = setInterval(function(){
+        timeleft--;
+        document.getElementById("timer").textContent = timeleft;
+        if(timeleft <= 0) {
+            console.log('Timer done')
+        }
+    },1000);
+</script>
+
+</body>
+</html>

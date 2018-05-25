@@ -1,0 +1,11 @@
+Teacher Picks Cat
+Client sends cat to server, server sends back pin
+Client displays pin
+
+Student enters pin and name
+Client sends pin and name, server matches all clients and teacher (somehow) and sends back  one question and the answers
+Client plays one question entirely on own computer, server deals with timing
+Client sends score
+Server compares scores and sends teacher places
+Teacher shows score and then moves to next question
+Repeat lines 6.5-10

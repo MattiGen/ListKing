@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="scripts/requests.js"></script>
+</head>
+<body>
+
+<button type="button" onclick="getTest()">Hello</button>
+
+<script>
+    function getTest(){
+        postRequest("Hi_there", "http://192.168.0.102:5000/games/");
+    };
+
+
+    let source = new EventSource("/stream");
+    source.addEventListener('newGame', function(event) {
+        let data = JSON.parse(event.data);
+        alert(data);
+        console.log("Just for fun");
+        alert("New game: " + data.id + data.category);
+    }, false);
+    source.addEventListener('error', function(event) {
+        alert("Failed to connect to event stream. Is Redis running?");
+    }, false);
+
+</script>
+
+</body>
+</html>

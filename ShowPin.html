@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Pin 4a</title>
+    <script src="scripts/requests.js"></script>
+</head>
+<body onload="getPin()">
+<p id="pin"> 75847 </p>
+
+<ul id="name0">
+
+</ul>
+
+<ul id="name1">
+
+</ul>
+
+<ul id="name2">
+
+</ul>
+
+<ul id="name3">
+
+</ul>
+
+<a href="ShowQuest.html">Start Game</a>
+</body>
+
+<script>
+    function getPin() {
+        pin = getRequests(url);
+        document.getElementById("pin").textContent = ('Pin: ' + pin);
+    };
+
+    //I have this request on the last page, so just pull it from local storage
+
+
+    let source = new EventSource("/stream");
+    source.addEventListener('newPlayer', function(event) {
+        let data = JSON.parse(event.data);
+        alert(data);
+        players.push(data);
+        populateList(0);
+        populateList(1);
+        populateList(2);
+        populateList(3);
+        alert("New game: " + data.id + data.category);
+    }, false);
+    source.addEventListener('error', function(event) {
+        alert("Failed to connect to event stream. Is Redis running?");
+    }, false);
+
+
+
+    let players;
+
+    function populateList(listNum){
+        let list = document.getElementById('name'+listNum.toString());
+        for(let i = 5*listNum; i < 5*listNum+5; i++) {
+            if (players[i] !== undefined){
+                let entry = document.createElement('li');
+                entry.appendChild(document.createTextNode(players[i]));
+                list.appendChild(entry);
+            }
+        }
+    }
+
+
+</script>
+</html>

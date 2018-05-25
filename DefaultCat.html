@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Default Cat 3a</title>
+    <script src="scripts/requests.js"></script>
+</head>
+
+<body>
+<p>This is where you are going to pick a category</p>
+<select id="category">
+
+</select>
+
+<button type="button" id="submitCat" onclick="submitCat()">Submit</button>
+<a id="nextPage" href="ShowPin.html" hidden></a>
+<!-- ip above will not stay static -->
+<script>
+    //This is where I am going to pull the questions from the server
+    let select = document.getElementById("category");
+    let options =['1','2','3'];
+    //let options = getRequests('http://192.168.0.102:5000/categories');
+
+    // Optional: Clear all existing options first:
+    select.innerHTML = "";
+    // Populate list with options:
+    for(let i = 0; i < options.length; i++) {
+        let opt = options[i];
+        select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
+    }
+
+
+
+    function submitCat() {
+        let e = document.getElementById("category");
+        let selectedCat = e.options[e.selectedIndex].value;
+        console.log(selectedCat);
+        pin=postRequest(selectedCat, 'url');
+        //This is based off the response
+        document.getElementById('nextPage').click();
+    }
+
+
+    //Make it so it just saves the selected varaible, and have a button that logs the result to check, no need to print the
+    //varaible, also fix variable names
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Takes user input
+Compares user input to list of answers
+If correct increment the score and append to list of answers
+Append the answer they add whether it is wrong or right, this makes it easier
+We just need to give rafi the score for each question, no need to keep an updated score list on our end
+
+

@@ -1,0 +1,29 @@
+html {
+    height: 100%;
+    background-image:url("Images/Shared/BackGround.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+@font-face {
+    font-family: myFont;
+    src: url("Images/Shared/avenir-heavy-webfont.woff");
+}
+
+div.pts{
+    height:10%;
+    width: 20%;
+    background-image: url("Images/PlayPage/Points.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+

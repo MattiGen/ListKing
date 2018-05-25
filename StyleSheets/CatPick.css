@@ -1,0 +1,56 @@
+html {
+    height: 100%;
+    background-image: url("Images/Shared/BackGround.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+@font-face {
+    font-family: myFont;
+    src: url("Images/Shared/avenir-heavy-webfont.woff");
+}
+
+
+
+a.create, a.default, a.usr {
+    background-color: rgb(214,152,34);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    padding: 18% 3%;
+    height: 60%;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "myFont";
+    font-size: 1.3em;
+
+}
+
+a.create{
+    float:left;
+    margin-top: 7%;
+    margin-right:1%;
+}
+
+a.default{
+    float:left;
+    margin-top: 7%;
+    margin-left:2.5%;
+}
+a.usr{
+    float:left;
+    margin-left:1%;
+    margin-right:1%;
+    margin-top: 7%;
+}
+
+a.create:hover, a.default:hover, a.usr:hover {
+    background-color: white;
+    color: rgb(214,152,34);
+}

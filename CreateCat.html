@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Cat 3c</title>
+    <script src="scripts/requests.js"></script>
+</head>
+<body>
+
+<input type="text" id="catName"> Enter the name of your question</input>
+<button type="button" onclick="sendCategory()"> Send request </button>
+
+
+</body>
+<script>
+    function sendCategory() {
+        let category = document.getElementById('catName').value;
+        console.log(category);
+        category=category.trim();
+        category=category.replace(/ /g, "_");
+        console.log(category);
+        postRequest(category, "http://192.168.0.102:5000/categories/");
+    }
+
+</script>
+</html>
