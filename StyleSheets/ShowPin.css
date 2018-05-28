@@ -1,0 +1,98 @@
+html {
+   height: 100%;
+   /*background-image: url(“BackGround.png”);*/
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   
+
+}
+
+
+
+a.startGame{
+   background-color: rgb(214,152,34);
+   color: white;
+   position: absolute;
+   text-align: center;
+   padding: 8px 8px;
+   left: 10%;
+   top: 682px;
+   right: 10%;
+   font-size: 32px;
+   text-decoration: none;
+   font-family: "Times New Roman", cursive,sans-serif;
+
+}
+
+
+.orangeBox {
+    background: rgb(214,152,34);
+    position: fixed;
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    left: 4%;
+    right: 4%;
+    top: 0px;
+    padding: 20px;
+    border-radius: 15px 15px 0px 0px;
+
+
+       
+}
+.whiteBox{
+    border-radius: 35px 35px 0 0;
+    border: 20px solid #d69822;
+    height: 360px;
+    background: white;
+    position: fixed;
+    left: 4%;
+    right: 4%;
+    top: 250px;
+    border-radius: 2%;
+
+    
+
+}
+
+ul.listStyle1, ul.listStyle2, ul.listStyle3, ul.listStyle4{
+    width:15%; 
+    float:left; 
+    list-style-type: none; 
+    color: dimgray;
+    position: fixed;
+    top: 240px;
+    line-height: 300%;
+    font-size: 25px;
+    
+}
+
+ul.listStyle1{
+    left: 10%;
+}
+ul.listStyle2{
+    left: 30%;
+}
+ul.listStyle3{
+    left: 50%;
+}
+ul.listStyle4{
+    left: 70%;
+}
+
+
+
+a.startGame:hover {
+   background-color: white;
+   color: rgb(214,152,34);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
