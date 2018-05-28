@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, abort, Response, render_template
-from models import *
 from flask_cors import CORS # Inter-OS communication
 from flask_sse import sse # Server-sent events
 from flask_sqlalchemy import SQLAlchemy # Easy flask -> python -> sqlite interfacing
@@ -9,10 +8,10 @@ CORS(app) # Initialize CORS
 app.config['REDIS_URL'] = 'redis://localhost' # Redis server allows SSE to work (somehow?)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-app.register_blueprint(sse, url_prefix='/stream')
+db = SQLAlchemy(app) # Initialize database
+app.register_blueprint(sse, url_prefix='/stream') # Sets URL for server-sent events
 
-# --- Database
+# --- Database definitions
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.Text, unique=True, nullable=False)
@@ -44,10 +43,55 @@ class Answer(db.Model):
 
 db.create_all()
 
-# ---
-Quiz = QuizData()
+# --- HTML routes
 
-@app.route('join/<int:gameID>', methods=['POST'])
+@app.route('/pinEnter/')
+def pinEnter():
+    return render_template('PinEnter.html')
+
+@app.route('/index/')
+def index():
+    return render_template('index.html')
+
+@app.route('/categoryPick/')
+def categoryPick():
+    return render_template('CategoryPick.html')
+
+@app.route('/createCat/')
+def createCat():
+    return render_template('CreateCat.html')
+
+@app.route('/gameEnd/')
+def gameEnd():
+    return render_template('GameEnd.html')
+
+@app.route('/play/')
+def play():
+    return render_template('Play.html')
+
+@app.route('/showPin/')
+def showPin():
+    return render_template('ShowPin.html')
+
+@app.route('/showQuest/')
+def showQuest():
+    return render_template('ShowQuest.html')
+
+@app.route('/userCat/')
+def userCat():
+    return render_template('UserCat.html')
+
+@app.route('/waitBefore/')
+def waitBefore():
+    return render_template('WaitBefore.html')
+
+@app.route('/waitDuring/')
+def waitDuring():
+    return render_template('WaitDuring.html')
+
+
+# --- HTTP endpoint routes
+@app.route('/join/<int:gameID>', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
     player = Player(username=username, score=0, isFacilitator=False, gameID=gameID)
@@ -55,14 +99,43 @@ def joinGame(gameID):
     db.session.commit()
     sse.publish(username, type='newPlayer')
 
-@app.route('/<string:category>/<string:question>/', methods=['GET', 'PUT'])
+@app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
+def scores(gameID):
+    '''
+    This endpoint allows us to 1) add updated scores after each question and 2) send the ranked leaderboard
+    '''
+    game = [i for i in Game.query.all() if i.id == gameID]
+    if request.method == 'POST': # Updating score after each question
+        jsonRequest = request.get_json(force=True)
+        username, score = jsonRequest[0], jsonRequest[1]
+        player = [i for i in Player.query.all() if i.username == username][0]
+        player.score = score
+        db.session.commit()
+        place = Player.query.order_by(Player.score).all().index(player) + 1
+        return jsonify(place)
+
+    elif request.method == 'GET': # For showing leaderboard on facilitator screen
+        return jsonify([{'username': i.username, 'score': i.score} for i in Player.query.order_by(Player.score).all()])
+
+
+
+@app.route('/<string:category>/questions', methods=['GET', 'POST'])
+def questions(category):
+    if request.method == 'GET':
+        category = [i for i in Category.query.all() if i.name == category][0]
+        return jsonify([i.name for i in category.questions])
+    if request.method == 'POST':
+        question = Question(name=request.get_json(force=True), category=caregory)
+
+
+@app.route('/<string:category>/<string:question>/answers', methods=['GET', 'POST'])
 def answers(category, question):
     """
     API Endpoint: Gets or puts answers
     """
     if request.method == 'GET':
         answers = [i for i in Answer.query.all() if i.question == question] # Gets all answers to question
-        return jsonify(answers)
+        return jsonify([i.name for i in answers])
 
     elif request.method == 'POST':
         questions = Question.query.all()
@@ -76,20 +149,12 @@ def answers(category, question):
 @app.route('/categories/', methods=['GET', 'POST'])
 def categories():
     if request.method == 'GET':
-        return Category.query.all()
+        return [i.name for i in Category.query.all()]
 
     else: # method == 'POST'
         category = Category(request.get_json(force=True))
         db.session.add(category)
         db.session.commit()
-
-@app.route('/addQuestion/', methods=['POST'])
-def addToQuestions():
-    json_request = request.get_json()
-    if not json_request:
-        abort(400)# Bad request
-
-    return jsonify(), 201 # Created
 
 
 @app.route('/games/', methods=['GET','POST'])
