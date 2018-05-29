@@ -2,30 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Play 5b</title>
-    <link rel="stylesheet" href="static/style/Play.css">
+    <title>Play</title>
+    <link rel="stylesheet" href="Page5b.css">
 
-<script src="scripts/Game%20Mods.js"></script>
+    <script src="scripts/Game%20Mods.js"></script>
 </head>
 <body onload="timer">
-<h3 id="question"></h3>
-<div class="pts">
-    <p id="points" class="points">Points: 0</p>
-</div>
-<input id='answer' type="text">
-<button type="button" id="submit" onclick="onSubmit(answers,player)">Submit</button>
-<p id="timer"></p>
-<a hidden id="wait" href="WaitDuring.html"></a>
-<a hidden id="done" href="GameEnd.html"></a>
 
+<div class="timerwrapper">
+    <div class="shrinking"></div>
+</div>
+
+<div class="pts" id="points">
+    <p id="point">Points: 0</p>
+</div>
+
+<div>
+    <p id="timer" class="timeBox"></p>
+</div>
+
+<div class="correctAnswers"></div>
+
+<div>
+    <h3 id="question" class="question"></h3>
+</div>
+
+<div class="searchFont" id="answer" style="overflow: hidden; padding-right: 2em">
+    <input type="text" id="searchBox" placeholder="Type answer here..."/>
+</div>
+
+<div>
+    <button type="button" id="enterBox" class="buttonFont" onclick="onSubmit(answers,player)">Enter</button>
+</div>
 
 <script>
-    //Choses the correct question from the local storage array
-    let questionList= JSON.parse(localStorage.getItem("questionList"));
-    let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))-1];
-    console.log(question);
-    document.getElementById('question').textContent= question;
-
     ///Pulls answer from input box
     let input = document.getElementById("answer");
     input.addEventListener("keydown", function(event) {
@@ -38,12 +48,13 @@
         let ans = document.getElementById("answer");
         return(ans.value);
     }
+    let question='What are the names of the seven dwarves?';
+    document.getElementById('question').textContent= question;
     let answers=['doc','grumpy','happy','sleepy','dopey','bashful','sneezy']; ///Pull From Server
     let player ={
         usrAnswers:[],
         score:0
-        };
-
+    };
 
     function onSubmit(answers,player){
         player.score+=checkAns(getAns(),player.usrAnswers,answers);
@@ -54,35 +65,23 @@
 
     };
 
-
-
-    ///Timer Things
-    let timeleft=15;
+    //Timer Things
+    let timeleft=30;
+    document.getElementById("timer").textContent = timeleft;
     let timer = setInterval(function(){
         timeleft--;
         document.getElementById("timer").textContent = timeleft;
         if(timeleft <= 0) {
-            questionsLeft=localStorage.getItem('questionsNum')-1;
-            localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
-            if (questionsLeft===0){
-                document.getElementById('done').click();
-            }else{
-                localStorage.setItem('questionsNum',questionsLeft);
-
-                document.getElementById('wait').click();
-            }
-
+            clearInterval(timer);
             console.log('Timer done')
         }
     },1000);
 
     ///Edits the 4 lists (max 7 items) will have to make them all nice and shit in CSS later
 
-
-
     ///The answers will be pulled from the server
     //Show something to indicate the player got a pint
-
+    
 </script>
 </body>
 </html>
