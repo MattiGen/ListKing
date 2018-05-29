@@ -1,0 +1,58 @@
+body {
+    background-image: url("background22.png");
+    position: fixed;
+    background-size: 100em;
+    font-family: "Avenir Next";
+}
+
+.timeBox {
+    border-radius: 15px 15px 15px 15px;
+    border: 6px solid #c88d1b;
+    background-color: #d69822;
+    color: #ffffff;
+    position: fixed;
+    right: 15px;
+    top: 10px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+    font-size: 75px;
+    font-weight: 500;
+    text-align: center;
+    width: 140px;
+}
+
+
+.questionNum {
+    border-radius: 15px 15px 15px 15px;
+    border: 6px solid #c88d1b;
+    background-color: #d69822;
+    color: #ffffff;
+    position: fixed;
+    right: 180px;
+    left: 15px;
+    top: 10px;
+    padding-top: 53px;
+    padding-bottom: 53px;
+    font-size: 75px;
+    font-weight: 500;
+    line-height: 36px;
+    text-align: center;
+}
+
+.question {
+    border-radius: 10px 10px 10px 10px;
+    border: 6px solid #d69822;
+    background-color: #ffffff;
+    position: fixed;
+    left: 15px;
+    top: 188px;
+    right: 15px;
+    text-align: center;
+    padding-top: 95px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 95px;
+    color: #686868;
+    font-size: 70px;
+    font-weight: 500;
+}
