@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Wait 4c</title>
+    <link rel="stylesheet" href="WaitBefore.css">
 </head>
 <body>
-<h1>Please wait for the game to start</h1>
+<div id="changeText" class="wait">Please wait for the game to start   </div>
+
 <a href="Play.html">Go to question</a>
 <!-- This page will possibly display the users score -->
 </body>
 <script>
+
+    var text = ["Please wait for the game to start    ", "Please wait for the game to start.   ", "Please wait for the game to start..  ", "Please wait for the game to start..."];
+    var counter = 0;
+    var elem = document.getElementById("changeText");
+    var inst = setInterval(change, 400);
+
+    function change() {
+        elem.innerHTML = text[counter];
+        counter++;
+        if (counter >= text.length) {
+            counter = 0;
+            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+        }
+    }
+
     //Request a list of the questions, this is where these variables are set
     let questionList=["q1","q2",'q3','q4','q5'];
     localStorage.setItem("questionList",JSON.stringify(questionList));
@@ -17,6 +34,7 @@
     localStorage.setItem('score',JSON.stringify(0));
     console.log(JSON.parse(localStorage.getItem("questionList")));
     console.log(JSON.parse(localStorage.getItem('questionsNum')));
+
 
 </script>
 
