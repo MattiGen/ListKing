@@ -5,9 +5,16 @@
     <title>Play</title>
     <link rel="stylesheet" href="Play.css">
 
-    <script src="scripts/Game%20Mods.js"></script>
+    <script src="../scripts/Game%20Mods.js"></script>
 </head>
 <body onload="timer">
+
+
+
+<a hidden id="wait" href="WaitDuring.html"></a>
+<a hidden id="done" href="GameEnd.html"></a>
+
+
 
 <div class="timerwrapper">
     <div class="shrinking"></div>
@@ -36,6 +43,14 @@
 </div>
 
 <script>
+
+
+    //Choses the correct question from the local storage array
+    let questionList= JSON.parse(localStorage.getItem("questionList"));
+    let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))-1];
+    console.log(question);
+    document.getElementById('question').textContent= question;
+
     ///Pulls answer from input box
     let input = document.getElementById("answer");
     input.addEventListener("keydown", function(event) {
@@ -48,7 +63,6 @@
         let ans = document.getElementById("answer");
         return(ans.value);
     }
-    let question='What are the names of the seven dwarves?';
     document.getElementById('question').textContent= question;
     let answers=['doc','grumpy','happy','sleepy','dopey','bashful','sneezy']; ///Pull From Server
     let player ={
@@ -72,8 +86,16 @@
         timeleft--;
         document.getElementById("timer").textContent = timeleft;
         if(timeleft <= 0) {
-            clearInterval(timer);
-            console.log('Timer done')
+            questionsLeft=localStorage.getItem('questionsNum')-1;
+            localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
+            if (questionsLeft===0){
+                document.getElementById('done').click();
+            }else{
+                localStorage.setItem('questionsNum',questionsLeft);
+
+                document.getElementById('wait').click();
+            }
+
         }
     },1000);
 
