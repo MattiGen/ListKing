@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <title>Question 5a</title>
     <script src="scripts/Timer.js"></script>
+    <link rel="stylesheet" href="ShowQuest.css">
 </head>
+
 <body onload="timer">
-<p>the question is going to be here with a timer as well, I beleive it is 5a</p>
-<p id="timer"></p>
+
+<p class="questionNum"> Question #</p>
+
+<p class="question">What are the names of the seven dwarves?</p>
+
+<p id="timer" class="timeBox"></p>
 
 <script>
-    let timeleft=15;
+
+    let timeleft=30;
+    document.getElementById("timer").textContent = timeleft;
     let timer = setInterval(function(){
         timeleft--;
         document.getElementById("timer").textContent = timeleft;
         if(timeleft <= 0) {
+            clearInterval(timer);
             console.log('Timer done')
         }
     },1000);
+
 </script>
 
 </body>
