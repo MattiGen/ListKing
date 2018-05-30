@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Wait 7c</title>
+    <link rel="stylesheet" href="WaitDuring.css">
 </head>
 <body>
-<a href="Play.html">Play</a>
+<!--- <a href="Play.html">Play</a> -->
 
-<p id="scoreDisplay"></p>
+<p id = "scoreDisplay" class = "scoreBox"> </p>
+<div id = "changeText" class = "waitText"> </div>
 
 </body>
-
 <script>
+    
     let score=localStorage.getItem("score");
-    document.getElementById('scoreDisplay').textContent = "You have " +score+' points';
+    document.getElementById('scoreDisplay').textContent = "You are currently in nth place with " +score+' points!';
+   
+   var text = ["Please wait for the next round to start   ", "Please wait for the next round to start.  ", "Please wait for the next round to start.. ", "Please wait for the next round to start..."];
+   var counter = 0;
+   var elem = document.getElementById("changeText");
+   var inst = setInterval(change, 400);
+
+   function change() {
+       elem.innerHTML = text[counter];
+       counter++;
+       if (counter >= text.length) {
+           counter = 0;
+           // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+       }
+   }
 </script>
 </html>
