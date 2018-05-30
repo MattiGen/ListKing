@@ -18,8 +18,7 @@
 <script>
     //This is where I am going to pull the questions from the server
     let select = document.getElementById("category");
-    let options =['1','2','3'];
-    //let options = getRequests('http://192.168.0.102:5000/categories');
+    let options = getRequests('http://192.168.0.102:5000/categories');
 
     // Optional: Clear all existing options first:
     select.innerHTML = "";
@@ -36,7 +35,7 @@
         let selectedCat = e.options[e.selectedIndex].value;
         console.log(selectedCat);
         pin=postRequest(selectedCat, 'url');
-        //This is based off the response
+        localStorage.setItem('pin',pin);
         document.getElementById('nextPage').click();
     }
 

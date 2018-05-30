@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Wait 4c</title>
     <link rel="stylesheet" href="../static/style/WaitBefore.css">
+    <script src="../scripts/requests.js"></script>
 </head>
 <body>
 <div id="changeText" class="wait">Please wait for the game to start   </div>
@@ -23,12 +24,14 @@
         counter++;
         if (counter >= text.length) {
             counter = 0;
-            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+            //clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
         }
     }
 
     //Request a list of the questions, this is where these variables are set
-    let questionList=["q1","q2",'q3','q4','q5'];
+    category=localStorage.getItem('category');
+    //Uses the saved category from PinEnter to request the list of questions
+    let questionList=JSON.parse(postRequest(category,'url'));
     localStorage.setItem("questionList",JSON.stringify(questionList));
     localStorage.setItem('questionsNum',0);
     localStorage.setItem('score',JSON.stringify(0));

@@ -19,7 +19,9 @@
     function submitPin(){
         let pin=document.getElementById('pin').value;
         let usrName=document.getElementById('usrname').value;
-        postRequest(usrName, "url with conotated pin");
+        category=postRequest(usrName, "url with conotated pin");
+        //Gets the Pin of the category of the joined game
+        localStorage.setItem('category',category);
         ///Make if statement based on post request to go
         document.getElementById('nextPage').click();
     }
