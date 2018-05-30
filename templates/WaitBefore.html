@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wait 4c</title>
-    <link rel="stylesheet" href="WaitBefore.css">
+    <link rel="stylesheet" href="../static/style/WaitBefore.css">
 </head>
 <body>
 <div id="changeText" class="wait">Please wait for the game to start   </div>
@@ -13,10 +13,10 @@
 </body>
 <script>
 
-    var text = ["Please wait for the game to start    ", "Please wait for the game to start.   ", "Please wait for the game to start..  ", "Please wait for the game to start..."];
-    var counter = 0;
-    var elem = document.getElementById("changeText");
-    var inst = setInterval(change, 400);
+    let text = ["Please wait for the game to start    ", "Please wait for the game to start.   ", "Please wait for the game to start..  ", "Please wait for the game to start..."];
+    let counter = 0;
+    let elem = document.getElementById("changeText");
+    let inst = setInterval(change, 400);
 
     function change() {
         elem.innerHTML = text[counter];
@@ -30,7 +30,7 @@
     //Request a list of the questions, this is where these variables are set
     let questionList=["q1","q2",'q3','q4','q5'];
     localStorage.setItem("questionList",JSON.stringify(questionList));
-    localStorage.setItem('questionsNum',String(questionList.length));
+    localStorage.setItem('questionsNum',0);
     localStorage.setItem('score',JSON.stringify(0));
     console.log(JSON.parse(localStorage.getItem("questionList")));
     console.log(JSON.parse(localStorage.getItem('questionsNum')));

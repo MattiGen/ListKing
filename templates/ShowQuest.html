@@ -4,27 +4,43 @@
     <meta charset="UTF-8">
     <title>Question 5a</title>
     <script src="../scripts/Timer.js"></script>
-    <link rel="stylesheet" href="ShowQuest.css">
+    <link rel="stylesheet" href="../static/style/ShowQuest.css">
 </head>
 
 <body onload="timer">
 
-<p class="questionNum"> Question #</p>
+<p class="questionNum" id="questionNum"> </p>
 
-<p class="question">What are the names of the seven dwarves?</p>
+<p class="question" id="question"></p>
 
 <p id="timer" class="timeBox"></p>
 
+<a id="wait" hidden href="ScoreBoard.html"></a>
+<a id="done" hidden href="Page I dont have yet"></a>
+
 <script>
 
-    let timeleft=30;
+    let questionList= JSON.parse(localStorage.getItem("questionList"));
+    let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
+    console.log(question);
+    document.getElementById('question').textContent= question;
+    document.getElementById('questionNum').textContent=("Question #" + (JSON.parse(localStorage.getItem('questionsNum'))+1));
+
+    let timeleft=3;
     document.getElementById("timer").textContent = timeleft;
     let timer = setInterval(function(){
         timeleft--;
         document.getElementById("timer").textContent = timeleft;
         if(timeleft <= 0) {
-            clearInterval(timer);
-            console.log('Timer done')
+            questionsLeft=(JSON.parse(localStorage.getItem('questionsNum')))+1;
+            if (questionsLeft===questionList.length){
+                document.getElementById('done').click();
+            }else{
+                localStorage.setItem('questionsNum',questionsLeft);
+
+                document.getElementById('wait').click();
+            }
+
         }
     },1000);
 

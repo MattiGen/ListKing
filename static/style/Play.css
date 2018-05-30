@@ -7,7 +7,7 @@ body {
     font-family: "Avenir Next";
     }
 
-#searchBox {
+#answers {
     border-radius: 10px 0 0 10px;
     background: #ffffff;
     border: 6px solid #d69822;
@@ -19,7 +19,7 @@ body {
     height: 4.5px;
  }
 
-#enterBox {
+#submit {
     border-radius: 0 10px 10px 0;
     background-color: #d69822;
     border: 6px solid #d69822;
