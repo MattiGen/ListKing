@@ -1,0 +1,57 @@
+html {
+   height: 100%;
+  /* background-image: url("Images/Shared/BackGround.png");*/
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   
+
+}
+
+
+.scoreBox{
+   border-radius: 10px 10px 10px 10px;
+   border: 6px solid #d69822;
+   background-color: #ffffff;
+   position: fixed;
+   left: 5%;
+   top: 100px;
+   right: 5%;
+   bottom: 5px;
+   text-align: center;
+   padding-top: 5px;
+   padding-left: 2%;
+   padding-right: 2%;
+   padding-bottom: 145px;
+   color: #d69822;
+   font-size: 6vw;
+   font-weight: 500;
+   line-height: 1.5;
+
+}
+
+
+.waitText {
+   border: none;
+   color: #d69822;
+   background-color: transparent;
+   font-size: 45px;
+   position: fixed;
+   font-weight: 500;
+   left: 5%;
+   right: 5%;
+   text-align: center;
+   top:  480px;
+}
+
+
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
