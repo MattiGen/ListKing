@@ -21,12 +21,12 @@
     <div class="shrinking"></div>
 </div>
 
-<div class="pts" id="point">
-    <p id="points">Points: 0</p>
+<div class="pts">
+    <p id="points" class="point">Points: 0</p>
 </div>
 
 <div>
-    <p id="timer" class="timeBox"></p>
+    <p id="timer" class="timeBox">3</p>
 </div>
 
 <div class="correctAnswers">
@@ -49,27 +49,24 @@
 </div>
 
 <div>
-    <h3 id="question" class="question"></h3>
+    <h3 id="question" class="question">www</h3>
 </div>
 
-<div class="searchFont" id="answers" style="overflow: hidden; padding-right: 2em">
-    <input type="text" id="answer" placeholder="Type answer here..."/>
+<div id="answers" class="searchFont" style="overflow: hidden; padding-right: 2em">
+    <input type="text" id="answer" class="searchBox" placeholder="Type answer here..."/>
 </div>
 
 <div>
-    <button type="button" id="submit" class="buttonFont" onclick="onSubmit(answers,player)">Enter</button>
+    <button type="button" id="submit" class="enterBox" onclick="onSubmit(answers,player)">Enter</button>
 </div>
 
 <script>
-
-
     //Choses the correct question from the local storage array
     let questionList= JSON.parse(localStorage.getItem("questionList"));
     let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
     let correctAns=[];
     console.log(question);
     document.getElementById('question').textContent= question;
-
     ///Pulls answer from input box
     let input = document.getElementById("answer");
     input.addEventListener("keydown", function(event) {
@@ -89,7 +86,6 @@
         usrAnswers:[],
         score:0
     };
-
     function onSubmit(answers,player){
         player.score+=checkAns(getAns(),player.usrAnswers,answers);
         if (checkAns(getAns(),player.usrAnswers,answers)===1){
@@ -103,10 +99,7 @@
         console.log(player.score,player.usrAnswers);
         document.getElementById('answer').value='';
         document.getElementById("points").textContent = ('Points: ' + player.score);
-
-
     };
-
     //Timer Things
     let timeleft=30;
     document.getElementById("timer").textContent = timeleft;
@@ -121,18 +114,15 @@
                 document.getElementById('done').click();
             }else{
                 localStorage.setItem('questionsNum',questionsLeft);
-
                 document.getElementById('wait').click();
             }
-
         }
     },1000);
-
     ///Edits the 4 lists (max 7 items) will have to make them all nice and shit in CSS later
     function populateAns(listNum){
         let list = document.getElementById('name'+listNum.toString());
         document.getElementById('name'+listNum.toString()).innerHTML = "";
-        for(let i = 5*listNum; i < 5*listNum+5; i++) {
+        for(let i = 8*listNum; i < 8*listNum+8; i++) {
             if (correctAns[i] !== undefined){
                 let entry = document.createElement('li');
                 entry.appendChild(document.createTextNode(correctAns[i]));
@@ -142,7 +132,7 @@
     };
     ///The answers will be pulled from the server
     //Show something to indicate the player got a pint
-    
+
 </script>
 </body>
 </html>

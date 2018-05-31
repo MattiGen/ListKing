@@ -1,13 +1,11 @@
-
-
 body {
     background-image: url("background22.png");
     position: fixed;
     background-size: 100em;
     font-family: "Avenir Next";
-    }
+}
 
-#answers {
+.searchBox {
     border-radius: 10px 0 0 10px;
     background: #ffffff;
     border: 6px solid #d69822;
@@ -17,7 +15,7 @@ body {
     right: 10%;
     top: 661.5px; /* 86% */
     height: 4.5px;
- }
+}
 
 #submit {
     border-radius: 0 10px 10px 0;
@@ -28,7 +26,7 @@ body {
     right: 20px;
     width: 180px;
     top: 661.5px;
-     /* bottom: 30.5px */
+    /* bottom: 30.5px */
 }
 
 #enterBox:hover {
@@ -41,7 +39,7 @@ body {
     border: 11px solid #d69822;
 }
 
-#point {
+.point {
     border-radius: 15px 15px 15px 15px;
     border: 3px solid #c88d1b;
     background-color: #d69822;
@@ -170,5 +168,3 @@ textarea:focus,
 button:focus {
     outline: none;
 }
-
-
