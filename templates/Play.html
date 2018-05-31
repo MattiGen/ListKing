@@ -5,7 +5,8 @@
     <title>Play</title>
     <link rel="stylesheet" href="../static/style/Play.css">
 
-    <script src="../scripts/Game%20Mods.js"></script>
+    <script src="../scripts/GameMods.js"></script>
+    <script src="../scripts/requests.js"></script>
 </head>
 <body onload="timer">
 
@@ -82,7 +83,8 @@
         return(ans.value);
     }
     document.getElementById('question').textContent= question;
-    let answers=['doc','grumpy','happy','sleepy','dopey','bashful','sneezy']; ///Pull From Server
+    //let answers=getRequests('url with question'); ///Pull From Server
+    let answers=['1','2','3'];
     let player ={
         usrAnswers:[],
         score:0
@@ -114,6 +116,7 @@
         if(timeleft <= 0) {
             questionsLeft=(JSON.parse(localStorage.getItem('questionsNum')))+1;
             localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
+            postRequest(score,'url with id somehow');
             if (questionsLeft===questionList.length){
                 document.getElementById('done').click();
             }else{

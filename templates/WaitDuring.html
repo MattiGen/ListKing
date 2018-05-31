@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wait 7c</title>
-    <link rel="stylesheet" href="WaitDuring.css">
+    <link rel="stylesheet" href="../static/style/WaitDuring.css">
 </head>
 <body>
 <!--- <a href="Play.html">Play</a> -->
@@ -17,10 +17,10 @@
     let score=localStorage.getItem("score");
     document.getElementById('scoreDisplay').textContent = "You are currently in nth place with " +score+' points!';
    
-   var text = ["Please wait for the next round to start   ", "Please wait for the next round to start.  ", "Please wait for the next round to start.. ", "Please wait for the next round to start..."];
-   var counter = 0;
-   var elem = document.getElementById("changeText");
-   var inst = setInterval(change, 400);
+   let text = ["Please wait for the next round to start   ", "Please wait for the next round to start.  ", "Please wait for the next round to start.. ", "Please wait for the next round to start..."];
+   let counter = 0;
+   let elem = document.getElementById("changeText");
+   let inst = setInterval(change, 400);
 
    function change() {
        elem.innerHTML = text[counter];
