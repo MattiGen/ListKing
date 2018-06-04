@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../FinalMaybe/temp" />
       <excludeFolder url="file://$MODULE_DIR$/../FinalMaybe/tmp" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.5.3 (C:\Users\Rafi\AppData\Local\Programs\Python\Python35\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

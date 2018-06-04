@@ -11,12 +11,12 @@
 
 <script>
     function getTest(){
-        postRequest("Hi_there", "http://192.168.0.102:5000/games/");
+        postRequest("TEST8", "http://192.168.0.102:5000/join/6/");
     };
 
 
     let source = new EventSource("/stream");
-    source.addEventListener('newGame', function(event) {
+    source.addEventListener('newPlayer', function(event) {
         let data = JSON.parse(event.data);
         alert(data);
         console.log("Just for fun");

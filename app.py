@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, abort, Response, render_template
 from flask_cors import CORS # Inter-OS communication
 from flask_sse import sse # Server-sent events
 from flask_sqlalchemy import SQLAlchemy # Easy flask -> python -> sqlite interfacing
+import json
 
 app = Flask(__name__) # Initialize app
 CORS(app) # Initialize CORS
@@ -44,6 +45,10 @@ class Answer(db.Model):
 db.create_all()
 
 # --- HTML routes
+
+@app.route('/SSETest/')
+def sseTest():
+    return render_template('SSETest.html')
 
 @app.route('/pinEnter/')
 def pinEnter():
@@ -89,22 +94,27 @@ def waitBefore():
 def waitDuring():
     return render_template('WaitDuring.html')
 
+@app.route('/defaultCat/')
+def defaultCat():
+    return render_template('DefaultCat.html')
 
 # --- HTTP endpoint routes
-@app.route('/join/<int:gameID>', methods=['POST'])
+@app.route('/join/<int:gameID>/', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
     player = Player(username=username, score=0, isFacilitator=False, gameID=gameID)
     db.session.add(player)
     db.session.commit()
-    sse.publish(username, type='newPlayer')
+    sse.publish(json.dumps(username), type='newPlayer')
+    game = [i for i in Game.query.all() if i.id == gameID][0]
+    return game.category
 
 @app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
 def scores(gameID):
     '''
-    This endpoint allows us to 1) add updated scores after each question and 2) send the ranked leaderboard
+    This endpoint allows us to 1) add updated scores after each question and 2) send the ranked leader board
     '''
-    game = [i for i in Game.query.all() if i.id == gameID]
+    game = [i for i in Game.query.all() if i.id == gameID][0]
     if request.method == 'POST': # Updating score after each question
         jsonRequest = request.get_json(force=True)
         username, score = jsonRequest[0], jsonRequest[1]
@@ -125,7 +135,9 @@ def questions(category):
         category = [i for i in Category.query.all() if i.name == category][0]
         return jsonify([i.name for i in category.questions])
     if request.method == 'POST':
-        question = Question(name=request.get_json(force=True), category=caregory)
+        question = Question(name=request.get_json(force=True), category=category)
+        db.session.add(question)
+        db.session.commit()
 
 
 @app.route('/<string:category>/<string:question>/answers', methods=['GET', 'POST'])
@@ -149,7 +161,7 @@ def answers(category, question):
 @app.route('/categories/', methods=['GET', 'POST'])
 def categories():
     if request.method == 'GET':
-        return [i.name for i in Category.query.all()]
+        return jsonify([i.name for i in Category.query.all()])
 
     else: # method == 'POST'
         category = Category(request.get_json(force=True))
@@ -161,13 +173,11 @@ def categories():
 def games():
     if request.method == 'POST':
         category = request.get_json(force=True)
-        if not category: # TODO: Check that category has questions.
-            abort(400)
-        else:
-            game = Game(category=category)
-            db.session.add(game)
-            db.session.commit()
-            return game.id
+
+        game = Game(category=category)
+        db.session.add(game)
+        db.session.commit()
+        return jsonify(game.id)
 
     elif request.method == 'GET':
         games = Game.query.all()
