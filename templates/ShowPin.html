@@ -44,7 +44,6 @@
     let source = new EventSource("/stream");
     source.addEventListener('newPlayer', function(event) {
         let data = JSON.parse(event.data);
-        alert(data);
         players.push(data);
         populateList(0);
         populateList(1);
