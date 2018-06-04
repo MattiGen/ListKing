@@ -29,7 +29,9 @@
 <ul id="name3" class="listStyle4">
 
 </ul>
-<a href="ShowQuest.html" class="startGame"> Start Game</a>
+
+<button type='button' class="startGame" onclick="startGame()"> Start Game</button>
+<a href="ShowQuest.html" hidden id="next"></a>
 </body>
 
 <script>
@@ -69,6 +71,11 @@
             }
         }
     }
+
+    function startGame(){
+        getRequests("http://192.168.0.102:5000/nextQuestion/");
+        document.getElementById('next').click();
+    };
 
 
 </script>
