@@ -12,7 +12,7 @@ html {
 
 
 
-a.startGame{
+.startGame{
    background-color: rgb(214,152,34);
    color: white;
    position: absolute;
@@ -20,6 +20,7 @@ a.startGame{
    padding: 13px;
    left: 10%;
    top: 650px;
+    width: 80%;
    right: 10%;
    border-radius: 10px;
    font-size: 32px;
@@ -87,7 +88,7 @@ ul.listStyle4{
 
 
 
-a.startGame:hover {
+.startGame:hover {
    background-color: white;
    color: rgb(214,152,34);
 }
