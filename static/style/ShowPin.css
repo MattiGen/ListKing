@@ -1,6 +1,6 @@
 html {
    height: 100%;
-   background-image: url("Images/Shared/BackGround.png");
+   /*background-image: url(“BackGround.png”);*/
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -10,10 +10,6 @@ html {
 
 }
 
-@font-face {
-    font-family: myFont;
-    src: url("Images/Shared/avenir-heavy-webfont.woff");
-}
 
 
 a.startGame{
@@ -27,7 +23,7 @@ a.startGame{
    right: 10%;
    font-size: 32px;
    text-decoration: none;
-   font-family: "myFont";
+   font-family: "Times New Roman", cursive,sans-serif;
 
 }
 
@@ -40,7 +36,7 @@ a.startGame{
     color: white;
     left: 4%;
     right: 4%;
-    top: 0;
+    margin-top: 42px;
     padding: 20px;
     border-radius: 15px 15px 0px 0px;
 
@@ -55,7 +51,7 @@ a.startGame{
     position: fixed;
     left: 4%;
     right: 4%;
-    top: 250px;
+    top: 200px;
     border-radius: 2%;
 
     
@@ -68,7 +64,7 @@ ul.listStyle1, ul.listStyle2, ul.listStyle3, ul.listStyle4{
     list-style-type: none; 
     color: dimgray;
     position: fixed;
-    top: 240px;
+    top: 190px;
     line-height: 300%;
     font-size: 25px;
     
