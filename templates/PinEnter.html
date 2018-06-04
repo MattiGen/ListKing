@@ -19,7 +19,7 @@
     function submitPin(){
         let pin=document.getElementById('pin').value;
         let usrName=document.getElementById('usrname').value;
-        category=postRequest(usrName, "http://192.168.0.102:5000/join/" + pin);
+        category=postRequest(usrName, "http://192.168.0.102:5000/join/" + pin + "/");
         //Gets the Pin of the category of the joined game
         localStorage.setItem('category',category);
         ///Make if statement based on post request to go
