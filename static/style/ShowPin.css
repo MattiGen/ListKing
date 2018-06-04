@@ -17,13 +17,15 @@ a.startGame{
    color: white;
    position: absolute;
    text-align: center;
-   padding: 8px 8px;
+   padding: 13px;
    left: 10%;
-   top: 682px;
+   top: 650px;
    right: 10%;
+   border-radius: 10px;
    font-size: 32px;
    text-decoration: none;
    font-family: "Times New Roman", cursive,sans-serif;
+    overflow: hidden;
 
 }
 
@@ -37,14 +39,14 @@ a.startGame{
     left: 4%;
     right: 4%;
     margin-top: 42px;
-    padding: 20px;
+    padding: 21px;
     border-radius: 15px 15px 0px 0px;
 
 
        
 }
 .whiteBox{
-    border-radius: 35px 35px 0 0;
+    border-radius: 0px 0px 10px 10px;
     border: 20px solid #d69822;
     height: 360px;
     background: white;
@@ -52,7 +54,7 @@ a.startGame{
     left: 4%;
     right: 4%;
     top: 200px;
-    border-radius: 2%;
+
 
     
 
