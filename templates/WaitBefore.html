@@ -30,14 +30,6 @@
 
     //Request a list of the questions, this is where these variables are set
     category=localStorage.getItem('category');
-    //Uses the saved category from PinEnter to request the list of questions
-    let questionList=JSON.parse(postRequest(category,'url'));
-    localStorage.setItem("questionList",JSON.stringify(questionList));
-    localStorage.setItem('questionsNum',0);
-    localStorage.setItem('score',JSON.stringify(0));
-    console.log(JSON.parse(localStorage.getItem("questionList")));
-    console.log(JSON.parse(localStorage.getItem('questionsNum')));
-
 
     let source = new EventSource("/stream");
     source.addEventListener('nextQuestion', function(event) {

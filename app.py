@@ -99,6 +99,11 @@ def defaultCat():
     return render_template('DefaultCat.html')
 
 # --- HTTP endpoint routes
+@app.route('/nextQuestion/', methods=['GET'])
+def nextQuestion():
+    sse.publish(1, type='nextQuestion')
+    return Response(200)
+
 @app.route('/join/<int:gameID>/', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
