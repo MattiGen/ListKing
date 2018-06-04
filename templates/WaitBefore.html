@@ -39,6 +39,15 @@
     console.log(JSON.parse(localStorage.getItem('questionsNum')));
 
 
+    let source = new EventSource("/stream");
+    source.addEventListener('nextQuestion', function(event) {
+        alert('Write a function here')
+    }, false);
+    source.addEventListener('error', function(event) {
+        alert("Failed to connect to event stream. Is Redis running?");
+    }, false);
+
+
 </script>
 
 </html>
