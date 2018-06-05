@@ -79,7 +79,7 @@
 
     category=localStorage.getItem('category');
     //Uses the saved category from PinEnter to request the list of questions
-    let questionList=JSON.parse(postRequest(category,'http://192.168.0.102:5000/' + category +/questions/'));
+    let questionList=JSON.parse(postRequest(category,'http://192.168.0.102:5000/' + category +'/questions/'));
     localStorage.setItem("questionList",JSON.stringify(questionList));
     localStorage.setItem('questionsNum',0);
     localStorage.setItem('score',JSON.stringify(0));

@@ -1,5 +1,5 @@
 function getRequests(url){
-    let xhr = new  XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.responseType="json";
     xhr.onreadystatechange=function(){
         if (xhr.readyState===XMLHttpRequest.DONE){
