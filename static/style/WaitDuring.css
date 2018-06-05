@@ -17,13 +17,14 @@ html {
    background-color: #ffffff;
    position: fixed;
    left: 5%;
-   top: 100px;
+   top: 50px;
    right: 5%;
    text-align: center;
    padding-top: 5px;
    padding-left: 2%;
    padding-right: 2%;
-   padding-bottom: 295px;
+   padding-bottom: 215px;
+    bottom:5px;
    color: #d69822;
    font-size: 6vw;
    font-weight: 500;
@@ -39,9 +40,9 @@ html {
    font-size: 5vw;
    position: fixed;
    font-weight: 500;
-   left: 5%;
+   left: 11%;
    right: 5%;
-   text-align: center;
+   text-align: left;
    top:  480px;
 }
 
