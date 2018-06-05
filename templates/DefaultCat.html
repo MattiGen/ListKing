@@ -37,13 +37,23 @@
 
 
     function submitCat() {
-        let e = document.getElementById("category");
-        let selectedCat = e.options[e.selectedIndex].value;
-        localStorage.setItem("category",selectedCat);
-        pin= postRequest(selectedCat, 'http://192.168.0.102:5000/games/');
-        localStorage.setItem('pin',pin);
-        //document.getElementById('nextPage').click();
+        let xhr2 = new  XMLHttpRequest();
+        data=JSON.stringify(data);
+        xhr2.responseType="json";
+        xhr2.onreadystatechange=function(){
+            if (xhr2.readyState===XMLHttpRequest.DONE){
+                let e = document.getElementById("category");
+                let selectedCat = e.options[e.selectedIndex].value;
+                localStorage.setItem("category",selectedCat);
+                pin=xhr2.response;
+                localStorage.setItem('pin',pin);
+                document.getElementById('nextPage').click();
+            }
+        };
+        xhr2.open('POST',url);
+        xhr2.send(data);
     }
+
 
 
     //Make it so it just saves the selected variable, and have a button that logs the result to check, no need to print the
