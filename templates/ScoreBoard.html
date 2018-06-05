@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>ScoreBoard</title>
+    <script src="../static/scripts/requests.js"></script>
 </head>
-<body>
+<body onload="getScores()">
 <p> This is going to show the score eventually</p>
 <!-- This page is going to take me a little bit to make, but I'll try to get to it this weekend, this
 is for between questions on the hosts side -->
 <a href="ShowQuest.html">Next Question</a>
+<p id="scoreboard"></p>
+
 
 </body>
+
+<script>
+
+    function getScores(){
+        pin=localStorage.getItem('pin');
+        scores=JSON.parse(getRequests('http://192.168.0.102/' + pin +'/scores/'));
+        document.getElementById('scoreboard').textContent= scores;
+        console.log(scores);
+    }
+
+</script>
 </html>

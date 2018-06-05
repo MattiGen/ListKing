@@ -18,8 +18,7 @@
 <script>
     //This is where I am going to pull the questions from the server
     let select = document.getElementById("category");
-    let options = getRequests('http://localhost:5000/categories/');
-    console.log(options);
+    let options = getRequests('http://192.168.0.102:5000/categories/');
 
     // Optional: Clear all existing options first:
     select.innerHTML = "";
@@ -34,14 +33,14 @@
     function submitCat() {
         let e = document.getElementById("category");
         let selectedCat = e.options[e.selectedIndex].value;
-        console.log(selectedCat);
-        pin = postRequest(selectedCat, 'http://localhost:5000/games/');
+        localStorage.setItem("category",selectedCat);
+        pin=postRequest(selectedCat, 'http://192.169.0.102:5000/games/');
         localStorage.setItem('pin',pin);
         document.getElementById('nextPage').click();
     }
 
 
-    //Make it so it just saves the selected varaible, and have a button that logs the result to check, no need to print the
+    //Make it so it just saves the selected variable, and have a button that logs the result to check, no need to print the
     //varaible, also fix variable names
 </script>
 </body>
