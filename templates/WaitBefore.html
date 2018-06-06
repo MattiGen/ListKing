@@ -32,7 +32,6 @@
     category=localStorage.getItem('category');
     //Uses the saved category from PinEnter to request the list of questions
     let xhr = new  XMLHttpRequest();
-    xhr.responseType="json";
     xhr.onreadystatechange=function(){
         if (xhr.readyState===XMLHttpRequest.DONE){
             let questionList=JSON.parse(xhr.response);
@@ -43,8 +42,8 @@
             console.log(JSON.parse(localStorage.getItem('questionsNum')));
         }
     };
-    xhr.open('POST',url);
-    xhr.send(JSON.stringify(category));
+    xhr.open('GET','http://192.168.0.102:5000/' + category + '/questions/');
+    xhr.send();
 
 
 

@@ -38,19 +38,19 @@
 
     function submitCat() {
         let xhr2 = new  XMLHttpRequest();
-        data=JSON.stringify(data);
+        let e = document.getElementById("category");
+        let selectedCat = e.options[e.selectedIndex].value;
+        data=JSON.stringify(selectedCat);
         xhr2.responseType="json";
         xhr2.onreadystatechange=function(){
             if (xhr2.readyState===XMLHttpRequest.DONE){
-                let e = document.getElementById("category");
-                let selectedCat = e.options[e.selectedIndex].value;
                 localStorage.setItem("category",selectedCat);
                 pin=xhr2.response;
                 localStorage.setItem('pin',pin);
                 document.getElementById('nextPage').click();
             }
         };
-        xhr2.open('POST',url);
+        xhr2.open('POST','http://192.168.0.102:5000/games/');
         xhr2.send(data);
     }
 

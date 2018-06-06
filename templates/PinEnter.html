@@ -20,7 +20,6 @@
         let pin=document.getElementById('pin').value;
         let usrName=document.getElementById('usrname').value;
         let xhr = new  XMLHttpRequest();
-        xhr.responseType="json";
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
                 category=xhr.response;
@@ -29,10 +28,9 @@
                 localStorage.setItem('pin', pin);
                 console.log(xhr.response);
                 document.getElementById('nextPage').click();
-                return xhr.response;
             }
         };
-        xhr.open('POST',"http://192.168.0.102:5000/join/" + pin + "/);
+        xhr.open('POST',"http://192.168.0.102:5000/join/" + pin + "/");
         xhr.send(usrName);
 
     }
