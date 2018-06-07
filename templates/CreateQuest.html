@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quest</title>
+</head>
+<body>
+<input type="text" id="question" style="width: 340px;">
+
+<p> Seperate your answers with commas</p>
+
+<textarea id='answers' rows="4" cols="50">
+
+</textarea>
+
+<button onclick="createQuestion()">Create Question</button>
+
+<script>
+    function createQuestion() {
+        let question = document.getElementById('question').value;
+        question = question.trim();
+        question = question.replace(/ /g, "_");
+        console.log(question);
+
+        let answers=document.getElementById('answers').value;
+        answers=answers.split(',');
+        for (let i=0; i<answers.length; i+=1){
+            answers[i]=answers[i].trim();
+            answers[i]=answers[i].replace(/ /g,"_");
+        }
+        console.log(answers);
+        let questionNum=localStorage.getItem(selectedNum);
+        let ques
+    };
+
+</script>
+
+</body>
+</html>

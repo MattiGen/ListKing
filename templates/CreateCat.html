@@ -7,19 +7,33 @@
 </head>
 <body>
 
-<input type="text" id="catName"> Enter the name of your question</input>
-<button type="button" onclick="sendCategory()"> Send request </button>
+<input id="catName" type="text" placeholder="Name of the Category">
+<select id="category">
+    <option value=1>1</option>
+    <option value=2>2</option>
+    <option value=3>3</option>
+    <option value=4>4</option>
+    <option value=5>5</option>
+
+</select>
+
+<button type="button" onclick="createCategory()"> Create Category </button>
+<a id="create" hidden href="CreateQuest.html"></a>
 
 
 </body>
 <script>
-    function sendCategory() {
+    function createCategory() {
         let category = document.getElementById('catName').value;
         console.log(category);
         category=category.trim();
         category=category.replace(/ /g, "_");
-        console.log(category);
-        postRequest(category, "http://192.168.0.102:5000/categories/");
+        let e = document.getElementById("category");
+        let selectedNum = e.options[e.selectedIndex].value;
+        console.log(selectedNum);
+        localStorage.setItem('catName',category);
+        localStorage.setItem('selectedNum',selectedNum);
+        document.getElementById('create').click();
     }
 
 </script>

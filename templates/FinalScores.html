@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <title>Final Scores</title>
 </head>
-<body>
+<body onload="getScores()">
 <p> This is the end game page for the host side</p>
+
+<script>
+    function getScores(){
+        pin=localStorage.getItem('pin');
+        let xhr = new XMLHttpRequest();
+        xhr.responseType="json";
+        xhr.onreadystatechange=function(){
+            if (xhr.readyState===XMLHttpRequest.DONE){
+                scores=JSON.parse(xhr.response);
+                document.getElementById('scoreboard').textContent= scores;
+                console.log(scores);
+            }
+        };
+        xhr.open('GET','http://192.168.0.102/' + pin +'/scores/');
+        xhr.send();
+
+</script>
 
 </body>
 </html>
