@@ -1,6 +1,9 @@
 function checkAns(userInput, usrAns,answers){
     for (let i=0; i<answers.length; i+=1){
-        if (userInput===answers[i]&&!usrAns.includes(userInput)){
+        let lowerInput=userInput.toLowerCase();
+        lowerInput=lowerInput.replace(/ /g,"_");
+        let lowerAns=answers[i].toLowerCase();
+        if (lowerInput===lowerAns&&!usrAns.includes(userInput)){
             return 1;
         }
 

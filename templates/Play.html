@@ -8,7 +8,7 @@
     <script src="../static/scripts/GameMods.js"></script>
     <script src="../static/scripts/requests.js"></script>
 </head>
-<body onload="timer">
+<body onload="timer; getAnswers()">
 
 
 
@@ -26,7 +26,7 @@
 </div>
 
 <div>
-    <p id="timer" class="timeBox">3</p>
+    <p id="timer" class="timeBox"></p>
 </div>
 
 <div class="correctAnswers">
@@ -49,7 +49,7 @@
 </div>
 
 <div>
-    <h3 id="question" class="question">www</h3>
+    <h3 id="question" class="question"></h3>
 </div>
 
 <div id="answers" class="searchFont" style="overflow: hidden; padding-right: 2em">
@@ -80,8 +80,19 @@
         return(ans.value);
     }
     document.getElementById('question').textContent= question;
-    //let answers=getRequests('url with question'); ///Pull From Server
-    let answers=['1','2','3'];
+
+    function getAnswers() {
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = "json";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                let answers = xhr.response;
+            }
+        };
+        xhr.open('GET', url); //MUST MAKE THIS DYNAMIC
+        xhr.send();
+    }
+
     let player ={
         usrAnswers:[],
         score:0

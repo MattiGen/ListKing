@@ -11,25 +11,46 @@
 
 </select>
 
-<button type="button" onclick="getCat()">Log Category</button>
+<button type="button" id="submitCat" onclick="submitCat()">Submit</button>
+<a id="nextPage" href="ShowPin.html" hidden></a>
 
 <script>
     //This is where I am going to pull the questions from the server
-    let select = document.getElementById("category");
-    let options = ["Cat1", "Cat2", "Cat3", "Cat4", "Cat5"];
+    let xhr = new XMLHttpRequest();
+    xhr.responseType="json";
+    xhr.onreadystatechange=function(){
+        if (xhr.readyState===XMLHttpRequest.DONE){
+            let options=xhr.response;
+            let select = document.getElementById("category");
+            // Optional: Clear all existing options first:
+            select.innerHTML = "";
+            // Populate list with options:
+            for (let i = 0; i < options.length; i++) {
+                let opt = options[i];
+                select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
+            }
+        };
+    };
+    xhr.open('GET','http://192.168.0.102:5000/categories/');
+    xhr.send();
 
-    // Optional: Clear all existing options first:
-    select.innerHTML = "";
-    // Populate list with options:
-    for(let i = 0; i < options.length; i++) {
-        let opt = options[i];
-        select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
-    }
 
-    function getCat() {
+    function submitCat() {
+        let xhr2 = new  XMLHttpRequest();
         let e = document.getElementById("category");
         let selectedCat = e.options[e.selectedIndex].value;
-        console.log(selectedCat);
+        data=JSON.stringify(selectedCat);
+        xhr2.responseType="json";
+        xhr2.onreadystatechange=function(){
+            if (xhr2.readyState===XMLHttpRequest.DONE){
+                localStorage.setItem("category",selectedCat);
+                pin=xhr2.response;
+                localStorage.setItem('pin',pin);
+                document.getElementById('nextPage').click();
+            }
+        };
+        xhr2.open('POST','http://192.168.0.102:5000/games/');
+        xhr2.send(data);
     }
     //Make it so it just saves the selected varaible, and have a button that logs the result to check, no need to print the
     //varaible, also fix variable names

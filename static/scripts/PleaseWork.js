@@ -1,20 +1,10 @@
-function test(){
-    if (document.Things.pin===1){
-        console.log("Fuck yes")
-        return(True)
-    }else{
-        console.log("I think this still works")
-    };
-};
+let dict=[{'us1':12},['us2',9],['us3',6]];
+//This gets each items keys
+console.log(Object.keys(dict[0]));
+//This Gets the scores
+console.log(dict[0].us1);
 
-function print(){
-    console.log("Hey, this would be nice")
-};
 
-let simple=function(){
-    let score=12;
-    return score
-
-}
-
-console.log(simple());
+let str='Hello,my,name,is';
+let res=str.split(',');
+console.log(res);

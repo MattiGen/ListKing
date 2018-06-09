@@ -19,13 +19,20 @@
     function submitPin(){
         let pin=document.getElementById('pin').value;
         let usrName=document.getElementById('usrname').value;
-        category=postRequest(usrName, "http://192.168.0.102:5000/join/" + pin + "/");
-        //Gets the Pin of the category of the joined game
-        localStorage.setItem('category',category);
-        localStorage.setItem('usrName', usrName);
-        localStorage.setItem('pin', pin);
-        ///Make if statement based on post request to go
-        //document.getElementById('nextPage').click();
+        let xhr = new  XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+            if (xhr.readyState===XMLHttpRequest.DONE){
+                category=xhr.response;
+                localStorage.setItem('category',category);
+                localStorage.setItem('usrName', usrName);
+                localStorage.setItem('pin', pin);
+                console.log(xhr.response);
+                document.getElementById('nextPage').click();
+            }
+        };
+        xhr.open('POST',"http://192.168.0.102:5000/join/" + pin + "/");
+        xhr.send(usrName);
+
     }
 </script>
 

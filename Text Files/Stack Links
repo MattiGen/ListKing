@@ -29,3 +29,22 @@ UL without bullets: https://stackoverflow.com/questions/1027354/need-an-unordere
 Local storage: https://www.w3schools.com/html/html5_webstorage.asp
 
 JS promises: https://developers.google.com/web/fundamentals/primers/promises
+
+
+
+
+
+function ordinal_suffix_of(i) {
+    var j = i % 10,
+        k = i % 100;
+    if (j == 1 && k != 11) {
+        return i + "st";
+    }
+    if (j == 2 && k != 12) {
+        return i + "nd";
+    }
+    if (j == 3 && k != 13) {
+        return i + "rd";
+    }
+    return i + "th";
+}

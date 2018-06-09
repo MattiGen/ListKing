@@ -2,21 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ScoreBoard</title>
-    <script src="../static/scripts/requests.js"></script>
+    <title>Final Scores</title>
 </head>
 <body onload="getScores()">
-<p> This is going to show the score eventually</p>
-<!-- This page is going to take me a little bit to make, but I'll try to get to it this weekend, this
-is for between questions on the hosts side -->
-<a href="ShowQuest.html">Next Question</a>
-<p id="scoreboard"></p>
-
-
-</body>
+<p> This is the end game page for the host side</p>
 
 <script>
-
     function getScores(){
         pin=localStorage.getItem('pin');
         let xhr = new XMLHttpRequest();
@@ -31,7 +22,7 @@ is for between questions on the hosts side -->
         xhr.open('GET','http://192.168.0.102/' + pin +'/scores/');
         xhr.send();
 
-    }
-
 </script>
+
+</body>
 </html>
