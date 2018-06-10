@@ -15,6 +15,8 @@
 
 <button onclick="createQuestion()">Create Question</button>
 
+<a id="done" href="CreateDone.html" hidden></a>
+
 <script>
     function createQuestion() {
         let question = document.getElementById('question').value;
@@ -28,9 +30,24 @@
             answers[i]=answers[i].trim();
             answers[i]=answers[i].replace(/ /g,"_");
         }
-        console.log(answers);
-        let questionNum=localStorage.getItem(selectedNum);
-        let ques
+        let allquestion=JSON.parse(localStorage.getItem('allquestion'));
+        allquestion[question]=answers;
+        localStorage.setItem('allquestion',JSON.stringify(allquestion));
+        console.log(allquestion);
+
+        let questionsLeft=JSON.parse(localStorage.getItem('selectedNum'));
+        questionsLeft=questionsLeft-1;
+        localStorage.setItem('selectedNum',questionsLeft);
+        console.log(questionsLeft);
+        if (questionsLeft===0){
+            ///Add post request here, too lazy to do now
+
+            document.getElementById('done').click();
+
+        }else {
+            window.location.reload();
+        };
+
     };
 
 </script>
