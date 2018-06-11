@@ -9,7 +9,7 @@
 <body>
 <div id="changeText" class="wait">Please wait for the game to start   </div>
 
-<a href="/Play/">Go to question</a>
+<a href="/Play/" hidden id="go"></a>
 <!-- This page will possibly display the users score -->
 </body>
 <script>
@@ -50,7 +50,7 @@
 
     let source = new EventSource("/stream");
     source.addEventListener('nextQuestion', function(event) {
-        alert('Write a function here')
+        document.getElementById('go').click();
     }, false);
     source.addEventListener('error', function(event) {
         alert("Failed to connect to event stream. Is Redis running?");

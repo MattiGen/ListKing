@@ -12,6 +12,8 @@ is for between questions on the hosts side -->
 <a href="/ShowQuest/">Next Question</a>
 <p id="scoreboard"></p>
 
+<button type="button" onclick="startGame()">Start Next Question</button>
+
 
 </body>
 
@@ -32,6 +34,11 @@ is for between questions on the hosts side -->
         xhr.send();
 
     }
+
+    function startGame(){
+        getRequests("http://192.168.0.102:5000/nextQuestion/");
+        document.getElementById('next').click();
+    };
 
 </script>
 </html>

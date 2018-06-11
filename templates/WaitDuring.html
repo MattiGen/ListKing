@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../static/style/WaitDuring.css">
 </head>
 <body>
-<!--- <a href="Play.html">Play</a> -->
+<a href="/Play/" id="go" hidden></a>
 
 <p id = "scoreDisplay" class = "scoreBox"> </p>
 <div id = "changeText" class = "waitText"> </div>
@@ -33,5 +33,13 @@
            // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
        }
    }
+
+    let source = new EventSource("/stream");
+    source.addEventListener('nextQuestion', function(event) {
+        document.getElementById('go').click();
+    }, false);
+    source.addEventListener('error', function(event) {
+        alert("Failed to connect to event stream. Is Redis running?");
+    }, false);
 </script>
 </html>
