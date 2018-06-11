@@ -30,6 +30,7 @@
                 document.getElementById('nextPage').click();
             }
         };
+        console.log("http://192.168.0.102:5000/join/" + (pin) + "/");
         xhr.open('POST',"http://192.168.0.102:5000/join/" + string(pin) + "/");
         xhr.send(usrName);
 
