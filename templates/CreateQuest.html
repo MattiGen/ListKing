@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Quest</title>
+    <script src="../static/scripts/requests.js"></script>
 </head>
 <body>
 <input type="text" id="question" style="width: 340px;">
@@ -23,6 +24,8 @@
         question = question.trim();
         question = question.replace(/ /g, "_");
         console.log(question);
+        let category=localStorage.getItem('catName');
+        postRequest(question,'http:192.168.0.102:5000/'+category+'/questions/');
 
         let answers=document.getElementById('answers').value;
         answers=answers.split(',');
@@ -30,6 +33,8 @@
             answers[i]=answers[i].trim();
             answers[i]=answers[i].replace(/ /g,"_");
         }
+
+        postRequest(answers,'http:192.168.0.102:5000/'+category + '/' + question + '/answers/');
         let allquestion=JSON.parse(localStorage.getItem('allquestion'));
         allquestion[question]=answers;
         localStorage.setItem('allquestion',JSON.stringify(allquestion));
@@ -42,7 +47,10 @@
         if (questionsLeft===0){
             ///Add post request here, too lazy to do now
 
+            let finishedCat={};
+            finishedCat[category]=allquestion;
             document.getElementById('done').click();
+
 
         }else {
             window.location.reload();
