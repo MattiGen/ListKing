@@ -42,7 +42,7 @@
             console.log(JSON.parse(localStorage.getItem('questionsNum')));
         }
     };
-    xhr.open('GET','http://192.168.0.102:5000/' + category + '/questions/');
+    xhr.open('GET','http://192.168.0.101:5000/' + category + '/questions/');
     xhr.send();
 
 

@@ -48,8 +48,6 @@ class Player(db.Model):
     gameID = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
     game = db.relationship('Game', backref=db.backref('players', lazy=True))
 
-    def __repr__(self):
-        return ' '.join([str(self.id), self.username, str(self.score), self.isFacilitator, str(self.gameID), self.game])
 
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -117,16 +115,16 @@ def nextQuestion():
     sse.publish(1, type='nextQuestion')
     return Response(200)
 
-@app.route('/join/<int:gameID>/', methods=['POST'])
+@app.route('/join/<string:gameID>/', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
     print(username)
-    game = [i for i in Game.query.all() if i.id == gameID]
+    game = [i for i in Game.query.all() if i.id == int(gameID)][0]
     player = Player(username=username, score=0, isFacilitator=False, game=game)
     db.session.add(player)
     db.session.commit()
     sse.publish(json.dumps(username), type='newPlayer')
-    return game.category
+    return jsonify(game[0].category)
 
 @app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
 def scores(gameID):
@@ -179,8 +177,10 @@ def answers(category, question):
         questions = Question.query.all()
         for i in questions:
             if i.question.name == question and i.category.name == category:
-                answer = Answer(name=request.get_json(force=True), question=[j for j in questions if j.name == question][0])
-                db.session.add(answer)
+                names = [i for i in request.get_json(force=True)]
+                for i in names:
+                    answer = Answer(name=i, question=[j for j in questions if j.name == question][0])
+                    db.session.add(answer)
                 db.session.commit()
 
 
