@@ -9,7 +9,7 @@
 <body>
 <div id="changeText" class="wait">Please wait for the game to start   </div>
 
-<a href="Play.html">Go to question</a>
+<a href="/play">Go to question</a>
 <!-- This page will possibly display the users score -->
 </body>
 <script>
@@ -42,7 +42,7 @@
             console.log(JSON.parse(localStorage.getItem('questionsNum')));
         }
     };
-    xhr.open('GET','http://192.168.0.102:5000/' + category + '/questions/');
+    xhr.open('GET','http://localhost:5000/' + category + '/questions/');
     xhr.send();
 
 

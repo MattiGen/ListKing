@@ -13,6 +13,33 @@ db = SQLAlchemy(app) # Initialize database
 app.register_blueprint(sse, url_prefix='/stream') # Sets URL for server-sent events
 
 # --- Database definitions
+class Answer(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    questionID = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    question = db.relationship('Question', backref=db.backref('answers', lazy=True))
+
+    def __repr__(self):
+        return ' '.join((str(self.id), self.name, str(self.questionID), self.question))
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    categoryID = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    category = db.relationship('Category', backref=db.backref('questions', lazy=True))
+
+    def __repr__(self):
+        return ' '.join((str(self.id), self.name, str(self.categoryID), self.category))
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    gameID = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=True)
+    game = db.relationship('Game', backref='category')
+
+    def __str__(self):
+        return str(self.name) + ' ' + str(self.game)
+
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.Text, unique=True, nullable=False)
@@ -21,25 +48,11 @@ class Player(db.Model):
     gameID = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
     game = db.relationship('Game', backref=db.backref('players', lazy=True))
 
+    def __repr__(self):
+        return ' '.join([str(self.id), self.username, str(self.score), self.isFacilitator, str(self.gameID), self.game])
+
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    category = db.Column(db.Text, nullable=False)
-
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    categoryID = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
-    category = db.relationship('Category', backref=db.backref('questions', lazy=True))
-
-class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    questionID = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    question = db.relationship('Question', backref=db.backref('answers', lazy=True))
 
 
 db.create_all()
@@ -107,11 +120,12 @@ def nextQuestion():
 @app.route('/join/<int:gameID>/', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
-    player = Player(username=username, score=0, isFacilitator=False, gameID=gameID)
+    print(username)
+    game = [i for i in Game.query.all() if i.id == gameID]
+    player = Player(username=username, score=0, isFacilitator=False, game=game)
     db.session.add(player)
     db.session.commit()
     sse.publish(json.dumps(username), type='newPlayer')
-    game = [i for i in Game.query.all() if i.id == gameID][0]
     return game.category
 
 @app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
@@ -123,7 +137,7 @@ def scores(gameID):
     if request.method == 'POST': # Updating score after each question
         jsonRequest = request.get_json(force=True)
         username, score = jsonRequest[0], jsonRequest[1]
-        player = [i for i in Player.query.all() if i.username == username][0]
+        player = [i.username for i in Player.query.all() if i.username == username][0]
         player.score = score
         db.session.commit()
         place = Player.query.order_by(Player.score).all().index(player) + 1
@@ -134,31 +148,38 @@ def scores(gameID):
 
 
 
-@app.route('/<string:category>/questions', methods=['GET', 'POST'])
+@app.route('/<string:category>/questions/', methods=['GET', 'POST'])
 def questions(category):
-    if request.method == 'GET':
+    try:
         category = [i for i in Category.query.all() if i.name == category][0]
+    except IndexError:
+        abort(404)
+
+    if request.method == 'GET':
+
         return jsonify([i.name for i in category.questions])
+
     if request.method == 'POST':
-        question = Question(name=request.get_json(force=True), category=category)
+        name = request.get_json(force=True)
+        question = Question(name=name, category=category)
         db.session.add(question)
         db.session.commit()
 
 
-@app.route('/<string:category>/<string:question>/answers', methods=['GET', 'POST'])
+@app.route('/<string:category>/<string:question>/answers/', methods=['GET', 'POST'])
 def answers(category, question):
     """
     API Endpoint: Gets or puts answers
     """
     if request.method == 'GET':
-        answers = [i for i in Answer.query.all() if i.question == question] # Gets all answers to question
+        answers = [i for i in Answer.query.all() if i.question.name == question] # Gets all answers to question
         return jsonify([i.name for i in answers])
 
     elif request.method == 'POST':
         questions = Question.query.all()
         for i in questions:
-            if i.question == question and i.category == category:
-                answer = Answer(request.get_json(force=True), question)
+            if i.question.name == question and i.category.name == category:
+                answer = Answer(name=request.get_json(force=True), question=[j for j in questions if j.name == question][0])
                 db.session.add(answer)
                 db.session.commit()
 
@@ -169,17 +190,17 @@ def categories():
         return jsonify([i.name for i in Category.query.all()])
 
     else: # method == 'POST'
-        category = Category(request.get_json(force=True))
+        category = Category(name=request.get_json(force=True))
         db.session.add(category)
         db.session.commit()
 
 
-@app.route('/games/', methods=['GET','POST'])
+@app.route('/games/', methods=['GET', 'POST'])
 def games():
     if request.method == 'POST':
         category = request.get_json(force=True)
 
-        game = Game(category=category)
+        game = Game(category=[i for i in Category.query.all() if i.name == category])
         db.session.add(game)
         db.session.commit()
         return jsonify(game.id)

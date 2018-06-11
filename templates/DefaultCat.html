@@ -13,7 +13,7 @@
 </select>
 
 <button type="button" id="submitCat" onclick="submitCat()">Submit</button>
-<a id="nextPage" href="ShowPin.html" hidden></a>
+<a id="nextPage" href="/showPin" hidden></a>
 <!-- ip above will not stay static -->
 <script>
 
@@ -32,7 +32,7 @@
             }
         };
     };
-    xhr.open('GET','http://192.168.0.102:5000/categories/');
+    xhr.open('GET','http://localhost:5000/categories/');
     xhr.send();
 
 
@@ -50,7 +50,7 @@
                 document.getElementById('nextPage').click();
             }
         };
-        xhr2.open('POST','http://192.168.0.102:5000/games/');
+        xhr2.open('POST','http://localhost:5000/games/');
         xhr2.send(data);
     }
 
