@@ -35,7 +35,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     gameID = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=True)
-    game = db.relationship('Game', backref='category')
+    game = db.relationship('Game', backref=db.backref('category', uselist=False))
 
     def __str__(self):
         return str(self.name) + ' ' + str(self.game)
@@ -124,7 +124,7 @@ def joinGame(gameID):
     db.session.add(player)
     db.session.commit()
     sse.publish(json.dumps(username), type='newPlayer')
-    return jsonify(game[0].category)
+    return jsonify(game.category.name)
 
 @app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
 def scores(gameID):

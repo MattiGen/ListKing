@@ -29,10 +29,10 @@
                 localStorage.setItem('usrName', usrName);
                 localStorage.setItem('pin', pin);
                 console.log(xhr.response);
-                //document.getElementById('nextPage').click();
+                document.getElementById('nextPage').click();
             }
         };
-        xhr.open('POST',"http://192.168.0.101:5000/join/" + pin + "/");
+        xhr.open('POST',"http://localhost:5000/join/" + pin + "/");
         xhr.send(usrName);
 
     }

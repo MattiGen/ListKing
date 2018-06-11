@@ -73,7 +73,7 @@
     }
 
     function startGame(){
-        getRequests("http://192.168.0.101:5000/nextQuestion/");
+        getRequests("http://localhost:5000/nextQuestion/");
         document.getElementById('next').click();
     };
 
@@ -88,7 +88,7 @@
             localStorage.setItem('score',JSON.stringify(0));
         }
     };
-    xhr.open('GET','http://192.168.0.101:5000/' + category +'/questions/');
+    xhr.open('GET','http://localhost:5000/' + category +'/questions/');
     xhr.send();
 
 
