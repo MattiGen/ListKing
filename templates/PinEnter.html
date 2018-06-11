@@ -13,7 +13,7 @@
 <button class = 'join' type="button" onclick="submitPin()"> Join </button>
 
 
-<a id='nextPage' href="/waitBefore" hidden></a>
+<a id='nextPage' href="/WaitBefore/" hidden></a>
 
 <script>
     function submitPin(){
@@ -30,7 +30,7 @@
                 document.getElementById('nextPage').click();
             }
         };
-        xhr.open('POST',"http://localhost:5000/join/" + pin + "/");
+        xhr.open('POST',"http://192.168.0.102:5000/join/" + string(pin) + "/");
         xhr.send(usrName);
 
     }

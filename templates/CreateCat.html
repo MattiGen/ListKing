@@ -33,7 +33,10 @@
         console.log(selectedNum);
         localStorage.setItem('catName',category);
         localStorage.setItem('selectedNum',selectedNum);
+        let allquestion={};
+        localStorage.setItem('allquestion',JSON.stringify(allquestion));
         document.getElementById('create').click();
+        postRequest(category,'http:192.168.0.102:5000/categories/')
     }
 
 </script>
