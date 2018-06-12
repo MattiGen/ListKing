@@ -10,7 +10,9 @@
 <!-- This page is going to take me a little bit to make, but I'll try to get to it this weekend, this
 is for between questions on the hosts side -->
 <a href="/showQuest/">Next Question</a>
-<p id="scoreboard"></p>
+<ol id="scoreboard">
+
+</ol>
 
 <button type="button" onclick="startGame()">Start Next Question</button>
 
@@ -20,13 +22,19 @@ is for between questions on the hosts side -->
 <script>
 
     function getScores(){
-        pin=localStorage.getItem('pin');
+        let pin=localStorage.getItem('pin');
         let xhr = new XMLHttpRequest();
         xhr.responseType="json";
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
-                scores=JSON.parse(xhr.response);
-                document.getElementById('scoreboard').textContent= scores;
+                let scores=JSON.parse(xhr.response);
+                let list=document.getElementById(scoreboard);
+                for(let i = 0; i<5; i++) {
+                    if (scores[i] !== undefined){
+                        let entry = document.createElement('li');
+                        entry.appendChild(document.createTextNode(score[i]));
+                        list.appendChild(entry+'pts');
+                    }
                 console.log(scores);
             }
         };
@@ -34,6 +42,8 @@ is for between questions on the hosts side -->
         xhr.send();
 
     }
+
+
 
     function startGame(){
         getRequests("http://192.168.0.102:5000/nextQuestion/");

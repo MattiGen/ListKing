@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<input class = 'input1' type="text" id="pina" placeholder="Enter pin" maxlength="5">
+<input class = 'input1' type="text" id="pin" placeholder="Enter pin" maxlength="5">
 <input class = 'input2' type="text" id="usrname" placeholder="Enter User Name" maxlength="10">
 <button class = 'join' type="button" onclick="submitPin()"> Join </button>
 
@@ -17,12 +17,10 @@
 
 <script>
     function submitPin(){
-        let pin = document.getElementById('pina').value;
-        let usrName = document.getElementById('usrname').value;
-        usrName=JSON.stringify(usrName);
-        console.log(usrName);
+        let pin=document.getElementById('pin').value;
+        let usrName=document.getElementById('usrname').value;
         let xhr = new  XMLHttpRequest();
-        xhr.onreadystatechange = function(){
+        xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
                 category=xhr.response;
                 localStorage.setItem('category',category);
@@ -32,7 +30,8 @@
                 document.getElementById('nextPage').click();
             }
         };
-        xhr.open('POST',"http://localhost:5000/join/" + pin + "/");
+        console.log("http://192.168.0.102:5000/join/" + (pin) + "/");
+        xhr.open('POST',"http://192.168.0.102:5000/join/" + string(pin) + "/");
         xhr.send(usrName);
 
     }
