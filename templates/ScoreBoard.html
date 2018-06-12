@@ -38,7 +38,7 @@ is for between questions on the hosts side -->
                 console.log(scores);
             }
         };
-        xhr.open('GET','http://192.168.0.102/' + pin +'/scores/');
+        xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
         xhr.send();
 
     }
@@ -46,7 +46,7 @@ is for between questions on the hosts side -->
 
 
     function startGame(){
-        getRequests("http://192.168.0.102:5000/nextQuestion/");
+        getRequests("http://192.168.0.101:5000/nextQuestion/");
         document.getElementById('next').click();
     };
 

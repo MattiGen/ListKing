@@ -25,7 +25,7 @@
         question = question.replace(/ /g, "_");
         console.log(question);
         let category=localStorage.getItem('catName');
-        postRequest(question,'http:192.168.0.102:5000/'+category+'/questions/');
+        postRequest(question,'http:192.168.0.101:5000/'+category+'/questions/');
 
         let answers=document.getElementById('answers').value;
         answers=answers.split(',');
@@ -34,7 +34,7 @@
             answers[i]=answers[i].replace(/ /g,"_");
         }
 
-        postRequest(answers,'http:192.168.0.102:5000/'+category + '/' + question + '/answers/');
+        postRequest(answers,'http:192.168.0.101:5000/'+category + '/' + question + '/answers/');
         let allquestion=JSON.parse(localStorage.getItem('allquestion'));
         allquestion[question]=answers;
         localStorage.setItem('allquestion',JSON.stringify(allquestion));

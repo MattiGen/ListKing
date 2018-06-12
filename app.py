@@ -109,7 +109,7 @@ def nextQuestion():
     sse.publish(1, type='nextQuestion')
     return Response(200)
 
-@app.route('/join/<string:gameID>/', methods=['POST'])
+@app.route('/join/<int:gameID>/', methods=['POST'])
 def joinGame(gameID):
     username = request.get_json(force=True)
     print(username)
@@ -196,7 +196,7 @@ def games():
     if request.method == 'POST':
         category = request.get_json(force=True)
 
-        game = Game(category=[i for i in Category.query.all() if i.name == category])
+        game = Game(category=[i for i in Category.query.all() if i.name == category][0])
         db.session.add(game)
         db.session.commit()
         return jsonify(game.id)

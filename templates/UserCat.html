@@ -31,7 +31,7 @@
             }
         };
     };
-    xhr.open('GET','http://192.168.0.102:5000/categories/');
+    xhr.open('GET','http://192.168.0.101:5000/categories/');
     xhr.send();
 
 
@@ -49,7 +49,7 @@
                 document.getElementById('nextPage').click();
             }
         };
-        xhr2.open('POST','http://192.168.0.102:5000/games/');
+        xhr2.open('POST','http://192.168.0.101:5000/games/');
         xhr2.send(data);
     }
     //Make it so it just saves the selected varaible, and have a button that logs the result to check, no need to print the

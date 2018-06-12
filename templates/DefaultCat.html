@@ -46,12 +46,14 @@
             if (xhr2.readyState===XMLHttpRequest.DONE){
                 localStorage.setItem("category",selectedCat);
                 pin=xhr2.response;
+                console.log(pin);
                 localStorage.setItem('pin',pin);
                 document.getElementById('nextPage').click();
             }
         };
         xhr2.open('POST','http://192.168.0.101:5000/games/');
         xhr2.send(data);
+        console.log(data);
     }
 
 
