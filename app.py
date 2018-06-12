@@ -19,8 +19,6 @@ class Answer(db.Model):
     questionID = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     question = db.relationship('Question', backref=db.backref('answers', lazy=True))
 
-    def __repr__(self):
-        return ' '.join((str(self.id), self.name, str(self.questionID), self.question))
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -28,8 +26,6 @@ class Question(db.Model):
     categoryID = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     category = db.relationship('Category', backref=db.backref('questions', lazy=True))
 
-    def __repr__(self):
-        return ' '.join((str(self.id), self.name, str(self.categoryID), self.category))
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -37,8 +33,6 @@ class Category(db.Model):
     gameID = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=True)
     game = db.relationship('Game', backref=db.backref('category', uselist=False))
 
-    def __str__(self):
-        return str(self.name) + ' ' + str(self.game)
 
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -162,6 +156,7 @@ def questions(category):
         question = Question(name=name, category=category)
         db.session.add(question)
         db.session.commit()
+        return question.name
 
 
 @app.route('/<string:category>/<string:question>/answers/', methods=['GET', 'POST'])
@@ -193,6 +188,7 @@ def categories():
         category = Category(name=request.get_json(force=True))
         db.session.add(category)
         db.session.commit()
+        return category.name
 
 
 @app.route('/games/', methods=['GET', 'POST'])
