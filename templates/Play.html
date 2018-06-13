@@ -65,6 +65,7 @@
     let questionList= JSON.parse(localStorage.getItem("questionList"));
     let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
     let correctAns=[];
+    let category=JSON.parse(localStorage.getItem('category'));
     console.log(question);
     document.getElementById('question').textContent= question;
     ///Pulls answer from input box
@@ -81,15 +82,16 @@
     }
     document.getElementById('question').textContent= question;
 
+    let answers;
     function getAnswers() {
         let xhr = new XMLHttpRequest();
         xhr.responseType = "json";
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                let answers = xhr.response;
+                answers = xhr.response;
             }
         };
-        xhr.open('GET', url); //MUST MAKE THIS DYNAMIC
+        xhr.open('GET', 'http://192.168.0.101:5000/'+category+'/'+question+'/answers/'); //MUST MAKE THIS DYNAMIC
         xhr.send();
     }
 
@@ -122,7 +124,7 @@
             localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
             pin = localStorage.getItem('pin');
             usrName=localStorage.getItem('usrName');
-            postRequest([usrName, score],'http://192.168.0.101:5000/' + pin + '/scores/');
+            postRequest([usrName, player.score],'http://192.168.0.101:5000/' + pin + '/scores/');
             if (questionsLeft===questionList.length){
                 document.getElementById('done').click();
             }else{

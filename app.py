@@ -103,6 +103,14 @@ def waitDuring():
 def defaultCat():
     return render_template('DefaultCat.html')
 
+@app.route('/finalScores/')
+def finalScores():
+    return render_template('FinalScores.html')
+
+@app.route('/scoreBoard/')
+def scoreBoard():
+    return render_template('ScoreBoard.html')
+
 # --- HTTP endpoint routes
 @app.route('/nextQuestion/', methods=['GET'])
 def nextQuestion():
@@ -171,12 +179,13 @@ def answers(category, question):
     elif request.method == 'POST':
         questions = Question.query.all()
         for i in questions:
-            if i.question.name == question and i.category.name == category:
+            if i.name == question and i.category.name == category:
                 names = [i for i in request.get_json(force=True)]
                 for i in names:
                     answer = Answer(name=i, question=[j for j in questions if j.name == question][0])
                     db.session.add(answer)
                 db.session.commit()
+                return jsonify(question)
 
 
 @app.route('/categories/', methods=['GET', 'POST'])
