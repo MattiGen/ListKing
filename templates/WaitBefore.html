@@ -29,7 +29,7 @@
     }
 
     //Request a list of the questions, this is where these variables are set
-    category=localStorage.getItem('category');
+    let category=JSON.parse(localStorage.getItem('category'));
     //Uses the saved category from PinEnter to request the list of questions
     let xhr = new  XMLHttpRequest();
     xhr.onreadystatechange=function(){

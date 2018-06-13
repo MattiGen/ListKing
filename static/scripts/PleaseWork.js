@@ -15,3 +15,9 @@ let j='hello';
 
 i[j]='djkhsfa';
 console.log(i);
+
+
+let cat='Geography';
+let url='ffdsfaddsa'+cat+'/asd'
+
+console.log(url);
