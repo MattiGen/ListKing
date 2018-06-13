@@ -28,20 +28,24 @@ is for between questions on the hosts side -->
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
                 let scores=JSON.parse(xhr.response);
-                let list=document.getElementById(scoreboard);
+                let list=document.getElementById('scoreboard');
                 for(let i = 0; i<5; i++) {
-                    if (scores[i] !== undefined){
+                    if (scores[i] !== undefined) {
                         let entry = document.createElement('li');
-                        entry.appendChild(document.createTextNode(score[i]));
-                        list.appendChild(entry+'pts');
+                        let userName=Object.keys(scores[i]);
+                        let usrScore=Object.values(scores[i]);
+                        let item=(userName+': '+usrScore +' '+'points');
+                        entry.appendChild(document.createTextNode(item));
+                        console.log(scores[i]);
+                        list.appendChild(entry);
                     }
-                console.log(scores);
-            }
-        };
+
+                };
+            };
         xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
         xhr.send();
 
-    };
+        };
     }
 
 

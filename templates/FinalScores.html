@@ -10,18 +10,31 @@
 
 <script>
     function getScores(){
-        pin=localStorage.getItem('pin');
+        let pin=localStorage.getItem('pin');
         let xhr = new XMLHttpRequest();
         xhr.responseType="json";
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
-                scores=JSON.parse(xhr.response);
-                document.getElementById('scoreboard').textContent= scores;
-                console.log(scores);
-            }
+                let scores=JSON.parse(xhr.response);
+                let list=document.getElementById('scoreboard');
+                for(let i = 0; i<5; i++) {
+                    if (scores[i] !== undefined) {
+                        let entry = document.createElement('li');
+                        let userName=Object.keys(scores[i]);
+                        let usrScore=Object.values(scores[i]);
+                        let item=(userName+': '+usrScore +' '+'points');
+                        entry.appendChild(document.createTextNode(item));
+                        console.log(scores[i]);
+                        list.appendChild(entry);
+                    }
+
+                };
+            };
+            xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
+            xhr.send();
+
         };
-        xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
-        xhr.send();
+    }
 
 </script>
 
