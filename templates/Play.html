@@ -86,7 +86,7 @@
         xhr.responseType = "json";
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                let answers = xhr.response;
+                answers = xhr.response;
             }
         };
         xhr.open('GET', url); //MUST MAKE THIS DYNAMIC
