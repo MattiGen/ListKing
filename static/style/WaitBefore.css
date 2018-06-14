@@ -1,8 +1,17 @@
-body {
-    background-image: url("background22.png");
-    position: fixed;
-    background-size: 100em;
-    font-family: "Avenir Next";
+html {
+    height: 100%;
+    background-image: url("Images/Shared/BackGround.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+@font-face {
+    font-family: myFont;
+    src: url("Images/Shared/avenir-heavy-webfont.woff");
 }
 
 .wait {

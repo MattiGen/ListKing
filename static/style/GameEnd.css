@@ -1,6 +1,6 @@
 html {
    height: 100%;
-  /* background-image: url("Images/Shared/BackGround.png");*/
+   background-image: url("Images/Shared/BackGround.png");
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -10,6 +10,10 @@ html {
 
 }
 
+@font-face {
+   font-family: myFont;
+   src: url("Images/Shared/avenir-heavy-webfont.woff");
+}
 
 .endBox{
    border-radius: 10px 10px 10px 10px;
@@ -41,7 +45,7 @@ html {
    right: 10%;
    font-size: 32px;
    text-decoration: none;
-   font-family: "Times New Roman", cursive,sans-serif;
+   font-family: "myFont";
 
 }
 .backToHome:hover {

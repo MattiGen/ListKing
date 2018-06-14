@@ -18,6 +18,11 @@ console.log(i);
 
 
 let cat='Geography';
-let url='ffdsfaddsa'+cat+'/asd'
+let url='ffdsfaddsa'+cat+'/asd';
 
 console.log(url);
+
+let scores=[['felix',7]];
+
+console.log(scores[0][1]);
+
