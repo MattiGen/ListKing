@@ -4,22 +4,28 @@
     <meta charset="UTF-8">
     <title>Create Cat 3c</title>
     <script src="../static/scripts/requests.js"></script>
+    <link rel="stylesheet" href="CreateCat.css">
 </head>
 <body>
+<div class="outer">
+    <div class="inner">
+        <div class="content">
+            <input id="catName" class="name" type="text" placeholder="Name of the Category">
+            <select id="category" class="dropdown">
+                <option value=0>Pick the number of questions for your category</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
 
-<input id="catName" type="text" placeholder="Name of the Category">
-<select id="category">
-    <option value=1>1</option>
-    <option value=2>2</option>
-    <option value=3>3</option>
-    <option value=4>4</option>
-    <option value=5>5</option>
+            </select>
 
-</select>
-
-<button type="button" onclick="createCategory()"> Create Category </button>
-<a id="create" hidden href="CreateQuest.html"></a>
-
+            <button type="button" class="generate" onclick="createCategory()"> Create Category </button>
+            <a id="create" hidden href="CreateQuest.html"></a>
+        </div>
+    </div>
+</div>
 
 </body>
 <script>
