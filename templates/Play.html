@@ -5,7 +5,6 @@
     <title>Play</title>
     <link rel="stylesheet" href="../static/style/Play.css">
 
-    <script src="../static/scripts/GameMods.js"></script>
     <script src="../static/scripts/requests.js"></script>
 </head>
 <body onload="timer; getAnswers()">
@@ -148,6 +147,20 @@
     };
     ///The answers will be pulled from the server
     //Show something to indicate the player got a pint
+
+    function checkAns(userInput, usrAns,answers){
+        for (let i=0; i<answers.length; i+=1){
+            let lowerInput=userInput.toLowerCase();
+            lowerInput=lowerInput.replace(/ /g,"_");
+            let lowerAns=answers[i].toLowerCase();
+            lowerAns=lowerAns.replace(/ /g,"_");
+            if (lowerInput===lowerAns&&!usrAns.includes(userInput)){
+                return 1;
+            }
+
+        }
+        return 0;
+    }
 
 </script>
 </body>
