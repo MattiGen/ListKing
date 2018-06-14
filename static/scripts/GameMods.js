@@ -3,6 +3,7 @@ function checkAns(userInput, usrAns,answers){
         let lowerInput=userInput.toLowerCase();
         lowerInput=lowerInput.replace(/ /g,"_");
         let lowerAns=answers[i].toLowerCase();
+        lowerAns=answers[i].replace(/ /g,"_");
         if (lowerInput===lowerAns&&!usrAns.includes(userInput)){
             return 1;
         }

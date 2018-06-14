@@ -64,6 +64,7 @@
     //Choses the correct question from the local storage array
     let questionList= JSON.parse(localStorage.getItem("questionList"));
     let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
+    question=question.replace("_"," ");
     let correctAns=[];
     let category=JSON.parse(localStorage.getItem('category'));
     console.log(question);
