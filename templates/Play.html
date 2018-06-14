@@ -63,7 +63,7 @@
     //Choses the correct question from the local storage array
     let questionList= JSON.parse(localStorage.getItem("questionList"));
     let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
-    question=question.replace("_"," ");
+
     let correctAns=[];
     let category=JSON.parse(localStorage.getItem('category'));
     console.log(question);
@@ -89,6 +89,7 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 answers = xhr.response;
+                question=question.replace("_",/ /g);
             }
         };
         xhr.open('GET', 'http://192.168.0.101:5000/'+category+'/'+question+'/answers/'); //MUST MAKE THIS DYNAMIC
