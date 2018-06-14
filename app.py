@@ -128,7 +128,7 @@ def joinGame(gameID):
     sse.publish(json.dumps(username), type='newPlayer')
     return jsonify(game.category.name)
 
-@app.route('/<int:gameID>/scores', methods=['GET', 'POST'])
+@app.route('/<int:gameID>/scores/', methods=['GET', 'POST'])
 def scores(gameID):
     '''
     This endpoint allows us to 1) add updated scores after each question and 2) send the ranked leader board
@@ -137,14 +137,14 @@ def scores(gameID):
     if request.method == 'POST': # Updating score after each question
         jsonRequest = request.get_json(force=True)
         username, score = jsonRequest[0], jsonRequest[1]
-        player = [i.username for i in Player.query.all() if i.username == username][0]
+        player = [i for i in Player.query.all() if i.username == username][0]
         player.score = score
         db.session.commit()
-        place = Player.query.order_by(Player.score).all().index(player) + 1
+        place = [i for i in Player.query.order_by(Player.score).all() if i.game == game].index(player) + 1
         return jsonify(place)
 
     elif request.method == 'GET': # For showing leaderboard on facilitator screen
-        return jsonify([{'username': i.username, 'score': i.score} for i in Player.query.order_by(Player.score).all()])
+        return jsonify([[i.username, i.score] for i in Player.query.order_by(Player.score).all() if i.game==game])
 
 
 

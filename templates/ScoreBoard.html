@@ -6,7 +6,7 @@
     <script src="../static/scripts/requests.js"></script>
 </head>
 <body onload="getScores()">
-<p> This is going to show the score eventually</p>
+<p> Standings </p>
 <!-- This page is going to take me a little bit to make, but I'll try to get to it this weekend, this
 is for between questions on the hosts side -->
 <a href="/showQuest/" hidden id="next">Next Question</a>
@@ -16,24 +16,22 @@ is for between questions on the hosts side -->
 
 <button type="button" onclick="startGame()">Start Next Question</button>
 
-
-</body>
-
 <script>
 
     function getScores(){
-        let pin=localStorage.getItem('pin');
+        let pin=JSON.parse(localStorage.getItem('pin'));
         let xhr = new XMLHttpRequest();
         xhr.responseType="json";
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
-                let scores=JSON.parse(xhr.response);
+                let scores = xhr.response;
+                console.log(scores);
                 let list=document.getElementById('scoreboard');
                 for(let i = 0; i<5; i++) {
                     if (scores[i] !== undefined) {
                         let entry = document.createElement('li');
-                        let userName=Object.keys(scores[i]);
-                        let usrScore=Object.values(scores[i]);
+                        let userName=scores[i][0];
+                        let usrScore = scores[i][1];
                         let item=(userName+': '+usrScore +' '+'points');
                         entry.appendChild(document.createTextNode(item));
                         console.log(scores[i]);
@@ -42,10 +40,11 @@ is for between questions on the hosts side -->
 
                 };
             };
-        xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
-        xhr.send();
+
 
         };
+        xhr.open('GET','http://192.168.0.101:5000/' + pin +'/scores/');
+        xhr.send();
     }
 
 
@@ -56,4 +55,7 @@ is for between questions on the hosts side -->
     };
 
 </script>
+</body>
+
+
 </html>

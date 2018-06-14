@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="GameEnd.css">
 </head>
 <body>
-<p class='endBox'> THE GAME IS OVER. YOU FINISHED IN PLACE: n</p>
+<p class='endBox' id="endbox"></p>
 <a href='/index/' class= 'backToHome'>Back to home</a>
 
 <script>
     let score=localStorage.getItem('score');
-    document.getElementById('endbox').textContent("The game is over, you finised with " + score +' points')
+    document.getElementById('endbox').textContent = ("The game is over, you finished with " + score +' points');
 </script>
 
 </body>

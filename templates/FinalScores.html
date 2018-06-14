@@ -5,23 +5,27 @@
     <title>Final Scores</title>
 </head>
 <body onload="getScores()">
-<p> This is the end game page for the host side</p>
-<p id="scoreboard"></p>
+<p> Final Standings</p>
+<ol id="scoreboard">
+
+</ol>
 
 <script>
+
     function getScores(){
-        let pin=localStorage.getItem('pin');
+        let pin=JSON.parse(localStorage.getItem('pin'));
         let xhr = new XMLHttpRequest();
         xhr.responseType="json";
         xhr.onreadystatechange=function(){
             if (xhr.readyState===XMLHttpRequest.DONE){
-                let scores=JSON.parse(xhr.response);
+                let scores = xhr.response;
+                console.log(scores);
                 let list=document.getElementById('scoreboard');
-                for(let i = 0; i<5; i++) {
+                for(let i = 0; i<scores.length; i++) {
                     if (scores[i] !== undefined) {
                         let entry = document.createElement('li');
-                        let userName=Object.keys(scores[i]);
-                        let usrScore=Object.values(scores[i]);
+                        let userName=scores[i][0];
+                        let usrScore = scores[i][1];
                         let item=(userName+': '+usrScore +' '+'points');
                         entry.appendChild(document.createTextNode(item));
                         console.log(scores[i]);
@@ -30,11 +34,13 @@
 
                 };
             };
-            xhr.open('GET','http://192.168.0.101/' + pin +'/scores/');
-            xhr.send();
+
 
         };
+        xhr.open('GET','http://192.168.0.101:5000/' + pin +'/scores/');
+        xhr.send();
     }
+
 
 </script>
 

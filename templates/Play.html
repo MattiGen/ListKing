@@ -101,6 +101,7 @@
         score:0
     };
     function onSubmit(answers,player){
+        console.log(answers);
         player.score+=checkAns(getAns(),player.usrAnswers,answers);
         if (checkAns(getAns(),player.usrAnswers,answers)===1){
             correctAns.push(getAns());
@@ -109,7 +110,7 @@
             populateAns(2);
             populateAns(3);
         }
-        player.usrAnswers.push(getAns());
+        player.usrAnswers.push(getAns().toLowerCase());
         console.log(player.score,player.usrAnswers);
         document.getElementById('answer').value='';
         document.getElementById("points").textContent = ('Points: ' + player.score);
@@ -155,7 +156,7 @@
             lowerInput=lowerInput.replace(/ /g,"_");
             let lowerAns=answers[i].toLowerCase();
             lowerAns=lowerAns.replace(/ /g,"_");
-            if (lowerInput===lowerAns&&!usrAns.includes(userInput)){
+            if (lowerInput===lowerAns&&!usrAns.includes(lowerInput)){
                 return 1;
             }
 
