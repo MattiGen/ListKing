@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Default Cat 3a</title>
     <script src="../static/scripts/requests.js"></script>
+    <link rel="stylesheet" href="DefaultCat.css">
 </head>
 
 <body>
 <p>This is where you are going to pick a category</p>
-<select id="category">
 
-</select>
-
-<button type="button" id="submitCat" onclick="submitCat()">Submit</button>
-<a id="nextPage" href="/showPin" hidden></a>
+<div class="outer">
+    <div class="inner">
+        <div class="content">
+            <select id="category" class="dropdown"></select>
+            <button type="button" class="generate" id="submitCat" onclick="submitCat()">Submit</button>
+            <a id="nextPage" href="/showPin" hidden></a>
+        </div>
+    </div>
+</div>
 <!-- ip above will not stay static -->
 <script>
 
