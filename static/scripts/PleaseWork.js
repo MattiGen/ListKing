@@ -5,7 +5,8 @@ console.log(Object.keys(dict[0]));
 console.log(dict[0].us1);
 
 
-let str='Hello,my,name,is';
+let str='Hello_my_name_is';
+console.log(str.replace(/_/g," "));
 let res=str.split(',');
 console.log(res);
 

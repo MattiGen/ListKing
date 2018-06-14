@@ -67,7 +67,7 @@
     let correctAns=[];
     let category=JSON.parse(localStorage.getItem('category'));
     console.log(question);
-    document.getElementById('question').textContent= question;
+    document.getElementById('question').textContent= question.replace(/_/g," ");
     ///Pulls answer from input box
     let input = document.getElementById("answer");
     input.addEventListener("keydown", function(event) {

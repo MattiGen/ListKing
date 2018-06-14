@@ -23,7 +23,7 @@
     let questionList= JSON.parse(localStorage.getItem("questionList"));
     let question=questionList[JSON.parse(localStorage.getItem("questionsNum"))];
     console.log(question);
-    document.getElementById('question').textContent= question;
+    document.getElementById('question').textContent= question.replace(/_/g,' ');
     document.getElementById('questionNum').textContent=("Question #" + (JSON.parse(localStorage.getItem('questionsNum'))+1));
 
     let timeleft=33;
