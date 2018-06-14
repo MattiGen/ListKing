@@ -6,18 +6,23 @@
     <script src="../static/scripts/requests.js"></script>
 </head>
 <body>
-<input type="text" id="question" style="width: 340px;">
+<div class="outer">
+    <div class="inner">
+        <div class="content">
+            <input type="text" id="question" placeholder="Please enter question (eg. List all blue flags:)" class="name">
 
-<p> Seperate your answers with commas</p>
+            <p class="generate2"> Enter all possible answers to this question, each seperated by a comma. (eg. Russia, Romania, Rwanda, etc.)</p>
 
-<textarea id='answers' rows="4" cols="50">
+            <textarea id='answers' rows="4" cols="50" placeholder="Seperate your answers with commas" class="name2">
 
-</textarea>
+            </textarea>
 
-<button onclick="createQuestion()">Create Question</button>
+            <button onclick="createQuestion()" class="generate">Create Next Question</button>
 
-<a id="done" href="CreateDone.html" hidden></a>
-
+            <a id="done" href="CreateDone.html" hidden></a>
+        </div>
+    </div>
+</div>
 <script>
     function createQuestion() {
         let question = document.getElementById('question').value;
