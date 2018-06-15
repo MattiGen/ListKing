@@ -68,3 +68,10 @@ button.join:hover {
     background-color: white;
     color: rgb(214,152,34);
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
