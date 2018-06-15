@@ -123,10 +123,12 @@
         document.getElementById("timer").textContent = timeleft;
         if(timeleft <= 0) {
             questionsLeft=(JSON.parse(localStorage.getItem('questionsNum')))+1;
-            localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
+
             pin = localStorage.getItem('pin');
             usrName=localStorage.getItem('usrName');
-            postRequest([usrName, (localStorage.getItem('score')+player.score)],'http://192.168.0.101:5000/' + pin + '/scores/');
+
+            postRequest([usrName, (JSON.parse(localStorage.getItem('score'))+player.score)],'http://192.168.0.101:5000/' + pin + '/scores/');
+            localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
             if (questionsLeft===questionList.length){
                 document.getElementById('done').click();
             }else{

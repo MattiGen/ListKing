@@ -111,6 +111,10 @@ def finalScores():
 def scoreBoard():
     return render_template('ScoreBoard.html')
 
+@app.route('/createQuest/')
+def createQuest():
+    return render_template('CreateQuest.html')
+
 # --- HTTP endpoint routes
 @app.route('/nextQuestion/', methods=['GET'])
 def nextQuestion():
@@ -138,7 +142,7 @@ def scores(gameID):
         jsonRequest = request.get_json(force=True)
         username, score = jsonRequest[0], jsonRequest[1]
         player = [i for i in Player.query.all() if i.username == username][0]
-        player.score += score
+        player.score = score
         db.session.commit()
         place = [i for i in Player.query.order_by(Player.score).all() if i.game == game].index(player) + 1
         return jsonify(place)
