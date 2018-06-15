@@ -126,7 +126,7 @@
             localStorage.setItem('score',JSON.stringify(JSON.parse(localStorage.getItem('score'))+player.score));
             pin = localStorage.getItem('pin');
             usrName=localStorage.getItem('usrName');
-            postRequest([usrName, player.score],'http://192.168.0.101:5000/' + pin + '/scores/');
+            postRequest([usrName, (localStorage.getItem('score')+player.score)],'http://192.168.0.101:5000/' + pin + '/scores/');
             if (questionsLeft===questionList.length){
                 document.getElementById('done').click();
             }else{

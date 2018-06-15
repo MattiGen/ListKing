@@ -138,7 +138,7 @@ def scores(gameID):
         jsonRequest = request.get_json(force=True)
         username, score = jsonRequest[0], jsonRequest[1]
         player = [i for i in Player.query.all() if i.username == username][0]
-        player.score = score
+        player.score += score
         db.session.commit()
         place = [i for i in Player.query.order_by(Player.score).all() if i.game == game].index(player) + 1
         return jsonify(place)
@@ -216,4 +216,3 @@ def games():
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True, host='0.0.0.0') # This host represents external ips
-    

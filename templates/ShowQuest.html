@@ -26,12 +26,12 @@
     document.getElementById('question').textContent= question.replace(/_/g,' ');
     document.getElementById('questionNum').textContent=("Question #" + (JSON.parse(localStorage.getItem('questionsNum'))+1));
 
-    let timeleft=33;
+    let timeleft=30;
     document.getElementById("timer").textContent = timeleft;
     let timer = setInterval(function(){
         timeleft--;
         document.getElementById("timer").textContent = timeleft;
-        if(timeleft <= 0) {
+        if(timeleft <= -5) {
             questionsLeft=(JSON.parse(localStorage.getItem('questionsNum')))+1;
             if (questionsLeft===questionList.length){
                 document.getElementById('done').click();
